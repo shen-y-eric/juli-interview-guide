@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juli's Stanford Interview Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #FAF7F2; color: #3A3330; margin: 0; padding: 0; font-size: 1rem; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #FFF8F6 0%, #FAF7F2 60%, #F3FAF4 100%);
+    border-bottom: 1px solid #F0D4D2;
+    padding: 2.2rem 2rem 1.6rem; text-align: center;
+  }
+  .hero h1 { font-family: 'Lora', Georgia, serif; color: #C4746E; font-size: 2.1rem; margin: 0 0 0.35rem; font-weight: 600; }
+  .hero .sub { color: #9B8E8A; font-size: 0.85rem; margin: 0 0 1rem; letter-spacing: 0.03em; }
+  #countdown {
+    display: inline-block; font-size: 1rem; font-weight: 500;
+    color: #C4746E; background: #FFF0EE;
+    border-radius: 20px; padding: 0.4rem 1.2rem;
+  }
+
+  /* Tab bar */
+  .tab-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: white; box-shadow: 0 1px 0 #F0D4D2;
+    display: flex; overflow-x: auto; padding: 0.4rem 0.75rem;
+    scrollbar-width: none; gap: 0.15rem;
+    justify-content: center;
+  }
+  @media (max-width: 720px) { .tab-bar { justify-content: flex-start; } }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-bar button {
+    flex-shrink: 0; background: none; border: none; cursor: pointer;
+    font-family: 'Inter', system-ui, sans-serif; font-size: 0.82rem; color: #8B7E7A;
+    padding: 0.42rem 0.85rem; border-radius: 20px; border-bottom: none;
+    transition: all 0.15s; white-space: nowrap; font-weight: 500;
+  }
+  .tab-bar button:hover:not(.active) { background: #FAF7F2; color: #C4746E; }
+  .tab-bar button.active { background: #FFF0EE; color: #C4746E; font-weight: 600; }
+
+  /* Page */
+  .page { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: tabFadeIn 0.18s ease; }
+  @keyframes tabFadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+  /* Cards */
+  .card { background: white; border-radius: 12px; padding: 1.75rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 0 0 1px #EDE8E3; transition: box-shadow 0.15s ease; }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.09), 0 0 0 1px #E5DDD8; }
+  h2 { font-family: 'Lora', Georgia, serif; color: #C4746E; margin-top: 0; margin-bottom: 0.75rem; font-size: 1.25rem; font-weight: 600; }
+  h3 { color: #9B8E8A; margin: 1.25rem 0 0.35rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  p { line-height: 1.75; margin: 0.6rem 0; }
+  ul { padding-left: 1.2rem; line-height: 1.9; margin: 0.5rem 0; }
+  li { margin-bottom: 0.15rem; }
+  em { color: #5A3A38; }
+  strong { color: #3A3330; }
+
+  /* Two col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+  .phase-card { background: #FAF7F2; border: 1px solid #E8E0D8; border-radius: 10px; padding: 1.25rem; }
+  .phase-card h3 { margin-top: 0; }
+
+  /* Callouts */
+  .callout {
+    border-left: 4px solid #E6AC3A; background: #FFFBF0;
+    border-radius: 0 8px 8px 0; padding: 0.75rem 1rem;
+    margin: 1rem 0; font-size: 0.9rem; line-height: 1.65; color: #4A3800;
+  }
+  .callout-rose { border-left-color: #C4746E; background: #FFF5F4; color: #5A2A28; }
+  .callout-sage { border-left-color: #7A9E7E; background: #F3FAF4; color: #2A4A2E; }
+  .callout cite { display: block; font-size: 0.82rem; margin-top: 0.4rem; color: #8B7E7A; font-style: normal; }
+
+  /* Pills */
+  .pill { display: inline-block; border-radius: 20px; padding: 0.18rem 0.65rem; font-size: 0.78rem; margin: 0.2rem; font-family: sans-serif; }
+  .pill-rose { background: #F0D4D2; color: #8B3A35; }
+  .pill-sage { background: #D4E8D6; color: #3A6B40; }
+
+  /* Sandwich */
+  .layer { border-radius: 10px; padding: 1.1rem 1.3rem; margin: 0.7rem 0; line-height: 1.75; }
+  .layer-cookie { background: #FEF6E8; border: 1px solid #E8C88A; }
+  .layer-ice { background: #EDF5FD; border: 1px solid #9BBFD6; }
+  .layer-title { font-family: 'Inter', system-ui, sans-serif; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.01em; }
+  .layer-note { font-size: 0.83rem; color: #8B7E7A; margin-top: 0.5rem; font-style: italic; }
+
+  /* Forms */
+  textarea {
+    width: 100%; padding: 0.85rem; border: 1px solid #D8CFC8;
+    border-radius: 6px; font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem;
+    color: #3A3330; background: #FEFCFA; resize: vertical; line-height: 1.75;
+  }
+  #intro-text { font-family: 'Lora', Georgia, serif; }
+  textarea:focus { outline: none; border-color: #C4746E; }
+  .field-label { font-weight: 600; margin: 0.9rem 0 0.3rem; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; color: #5A3A38; letter-spacing: 0.01em; }
+
+  /* Timers */
+  .timer-display {
+    font-size: 2.6rem; font-weight: 600; font-family: 'Inter', system-ui, sans-serif;
+    text-align: center; margin: 0.5rem 0 0.2rem; letter-spacing: 0.06em;
+  }
+  .timer-rose { color: #C4746E; }
+  .timer-sage { color: #7A9E7E; }
+  .timer-track { border-radius: 10px; height: 7px; margin-bottom: 0.9rem; }
+  .track-rose { background: #F0D4D2; }
+  .track-sage { background: #D4E8D6; }
+  .timer-fill { border-radius: 10px; height: 7px; width: 100%; transition: width 0.9s linear, background 0.5s; }
+
+  /* Buttons */
+  .btn { display: inline-block; padding: 0.48rem 1rem; border-radius: 8px; border: none; cursor: pointer; font-size: 0.88rem; font-family: 'Inter', system-ui, sans-serif; font-weight: 500; transition: opacity 0.15s; }
+  .btn + .btn { margin-left: 0.4rem; }
+  .btn:hover { opacity: 0.82; }
+  .btn-rose { background: #C4746E; color: white; }
+  .btn-sage { background: #7A9E7E; color: white; }
+  .btn-outline-rose { background: transparent; border: 1.5px solid #C4746E; color: #C4746E; }
+  .btn-outline-sage { background: transparent; border: 1.5px solid #7A9E7E; color: #7A9E7E; }
+
+  /* Practice question box */
+  #question-display {
+    background: #FFF8F6; border: 1px solid #E8E0D8; border-left: 4px solid #C4746E;
+    border-radius: 0 10px 10px 0; padding: 1.4rem 1.5rem; margin: 1rem 0;
+    font-style: italic; line-height: 1.85; min-height: 90px;
+    color: #3A3330; font-size: 1.05rem; font-family: 'Lora', Georgia, serif;
+  }
+  #session-counter {
+    font-size: 0.78rem; color: #9B8E8A; font-family: 'Inter', system-ui, sans-serif;
+    margin-top: 0.3rem; text-align: right;
+  }
+  /* Question bank */
+  .qb-item {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 0.75rem; padding: 0.7rem 0; border-bottom: 1px solid #F0EBE8;
+  }
+  .qb-item:last-child { border-bottom: none; }
+  .qb-q { font-size: 0.88rem; line-height: 1.65; font-style: italic; color: #3A3330; flex: 1; font-family: 'Lora', Georgia, serif; }
+  .qb-load { flex-shrink: 0; font-size: 0.78rem; padding: 0.28rem 0.65rem; }
+
+  /* Checklist */
+  .checklist-item { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.55rem 0; }
+  .checklist-item input[type=checkbox] { margin-top: 0.3rem; accent-color: #7A9E7E; width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+  .checklist-item label { cursor: pointer; line-height: 1.5; font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; }
+  .checklist-item input:checked + label { text-decoration: line-through; color: #bbb; }
+
+  /* Story bank accordion grid */
+  .sb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; align-items: start; }
+  @media (max-width: 620px) { .sb-grid { grid-template-columns: 1fr; } }
+  .sb-card { box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 0 0 1px #EDE8E3; border-radius: 10px; background: white; overflow: hidden; }
+  .sb-card.lead { box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 0 0 1px #D4938E; }
+  .sb-card.warning-card { box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 0 0 1px #E0C070; }
+  .sb-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 1.1rem; cursor: pointer; user-select: none; gap: 0.5rem;
+  }
+  .sb-header:hover { background: #FAF7F2; }
+  .sb-theme { font-weight: 600; font-size: 0.88rem; color: #3A3330; font-family: 'Inter', system-ui, sans-serif; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+  .sb-badge { font-size: 0.68rem; border-radius: 10px; padding: 0.12rem 0.5rem; font-family: 'Inter', system-ui, sans-serif; font-weight: 600; white-space: nowrap; }
+  .badge-lead { background: #F0D4D2; color: #8B3A35; }
+  .badge-warn { background: #FFF0C0; color: #7A5A00; }
+  .sb-arrow { color: #C4746E; font-size: 0.75rem; transition: transform 0.2s; flex-shrink: 0; }
+  .sb-card.open .sb-arrow { transform: rotate(180deg); }
+  .sb-body { display: block; max-height: 0; overflow: hidden; padding: 0 1.1rem; border-top: 1px solid transparent; transition: max-height 0.28s ease, padding 0.2s ease, border-color 0.2s ease; }
+  .sb-card.open .sb-body { max-height: 900px; padding: 0 1.1rem 1.1rem; border-top-color: #F0EBE8; }
+  .sb-source { font-size: 0.77rem; color: #9B8E8A; font-family: 'Inter', system-ui, sans-serif; margin: 0.7rem 0 0.4rem; font-style: italic; }
+  .sb-beats { font-size: 0.87rem; line-height: 1.8; padding-left: 1.1rem; margin: 0.35rem 0 0.6rem; color: #3A3330; }
+  .sb-note { font-size: 0.84rem; line-height: 1.65; padding: 0.6rem 0.9rem; border-radius: 0 6px 6px 0; margin: 0.5rem 0; }
+  .sb-note-gold { background: #FFFBF0; border-left: 3px solid #E6AC3A; color: #4A3800; }
+  .sb-note-rose { background: #FFF5F4; border-left: 3px solid #C4746E; color: #5A2A28; }
+  .sb-notes-label { font-size: 0.74rem; font-family: 'Inter', system-ui, sans-serif; color: #9B8E8A; margin: 0.85rem 0 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .sb-textarea { width: 100%; padding: 0.55rem 0.7rem; border: 1px solid #E0D8D4; border-radius: 6px; font-family: 'Inter', system-ui, sans-serif; font-size: 0.84rem; resize: vertical; min-height: 60px; color: #3A3330; background: #FEFCFA; line-height: 1.6; }
+  .sb-textarea:focus { outline: none; border-color: #C4746E; }
+  .sb-saved { font-size: 0.72rem; color: #7A9E7E; font-family: sans-serif; margin-top: 0.2rem; opacity: 0; transition: opacity 0.3s; }
+  .sb-saved.show { opacity: 1; }
+
+  /* Webinar notes */
+  .wn-section { border-left: 3px solid #F0D4D2; padding-left: 1rem; margin: 1.25rem 0; }
+  .wn-section h3 { margin-top: 0; }
+  .timeline-row { display: flex; gap: 1rem; margin: 0.4rem 0; font-family: sans-serif; font-size: 0.9rem; }
+  .timeline-date { font-weight: 600; color: #C4746E; flex-shrink: 0; min-width: 90px; }
+
+  /* Quote blocks */
+  blockquote {
+    font-family: 'Lora', Georgia, serif;
+    margin: 1rem 0; padding: 0.75rem 1rem 0.75rem 1.25rem;
+    border-left: 3px solid #D4B8B6; background: #FFF8F7;
+    border-radius: 0 6px 6px 0; font-style: italic; line-height: 1.7;
+    color: #4A2A28;
+  }
+  blockquote cite { display: block; font-style: normal; font-size: 0.82rem; color: #8B7E7A; margin-top: 0.35rem; }
+
+  /* Print stylesheet */
+  @media print {
+    .tab-bar, .hero #countdown, .btn, .timer-display, .timer-track,
+    #fc-question, #fc-notes, #fc-list, .sb-saved, .sb-textarea,
+    #intro-wc { display: none !important; }
+    .hero { padding: 1rem; background: none; border: none; }
+    .hero h1 { font-size: 1.4rem; }
+    .page { padding: 0; max-width: 100%; }
+    .tab-panel { display: block !important; }
+    .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; margin-bottom: 0.75rem; }
+    .sb-card { break-inside: avoid; }
+    .sb-body { max-height: none !important; overflow: visible !important; }
+    body { background: white; font-size: 0.9rem; }
+    h2 { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>You've got this cutie <3 ✨</h1>
+  <p class="sub">Stanford Healthcare · Medicine Panel 2 · Tuesday July 28, 2026 · 3:00 PM · Virtual Zoom</p>
+  <div id="countdown">Loading…</div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="active" onclick="showTab('overview', this)">Overview</button>
+  <button onclick="showTab('intro', this)">Introduction</button>
+  <button onclick="showTab('method', this)">The Method</button>
+  <button onclick="showTab('stories', this)">Story Bank</button>
+  <button onclick="showTab('practice', this)">Practice</button>
+  <button onclick="showTab('mindset', this)">Mindset</button>
+  <button onclick="showTab('dayof', this)">Day-Of</button>
+  <button onclick="showTab('stanford', this)">Know Stanford</button>
+  <button onclick="showTab('webinar', this)">Webinar Notes</button>
+</div>
+
+<div class="page">
+
+  <!-- ══════════════ OVERVIEW ══════════════ -->
+  <div id="tab-overview" class="tab-panel active">
+    <div class="card">
+      <h2>The Two-Phase Interview</h2>
+      <div class="two-col">
+        <div class="phase-card">
+          <h3 style="color:#C4746E; text-transform:none; letter-spacing:0;">Phase 1 — Panel</h3>
+          <p style="font-family:sans-serif; font-size:0.88rem; margin:0 0 0.75rem;"><strong>July 28 · 3:00 PM · Zoom</strong></p>
+          <ul>
+            <li>4–5 candidates on the same call</li>
+            <li>~1 hour</li>
+            <li>4 behavioral questions, rotational</li>
+            <li>You hear 3 questions before yours</li>
+            <li>No Q&amp;A at the end</li>
+            <li>Next steps given at close</li>
+          </ul>
+          <span class="pill pill-rose">Advanced Lung Disease</span>
+          <span class="pill pill-rose">Neurology</span>
+          <span class="pill pill-rose">General Medicine</span>
+        </div>
+        <div class="phase-card">
+          <h3 style="color:#7A9E7E; text-transform:none; letter-spacing:0;">Phase 2 — Unit Level</h3>
+          <p style="font-family:sans-serif; font-size:0.88rem; margin:0 0 0.75rem;"><strong>Aug 3–7 (if invited) · In Person</strong></p>
+          <ul>
+            <li>1–2 candidates only</li>
+            <li>Hiring manager + unit team</li>
+            <li>Behavioral + personal questions</li>
+            <li>Possible clinical scenario</li>
+            <li>Much more conversational</li>
+            <li><strong>You can ask questions</strong></li>
+          </ul>
+          <span class="pill pill-sage">More relaxed</span>
+          <span class="pill pill-sage">Show your personality</span>
+        </div>
+      </div>
+      <div class="callout">
+        You'll hear 3 of the 4 questions before yours. Use that time — not to change your answer after hearing someone else's, but to quietly settle into the story you already know.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What These Questions Are Actually Asking</h2>
+      <p>Every question starts with: <em>"Tell me about a time during your clinical rotation when…"</em> They're not testing whether you know drug mechanisms or lab values. They're asking: how do you think? How do you act when things are unclear, busy, or hard?</p>
+      <p>The whole premise of behavioral interviewing is that past behavior predicts future behavior. So they want a real story — specific, yours, from your clinical rotations. Not "I would…" Not hypothetical. A moment that actually happened.</p>
+      <p>The good news: the questions are general enough that you've encountered something similar, even if you didn't realize it at the time. If a question genuinely stumps you, pause — don't say "I haven't experienced that." Take a breath and find the closest thing you have. That moment you almost walked past the room and didn't? That counts.</p>
+      <div class="callout callout-rose">
+        Keep your answers rooted in your nursing school clinicals. That's where they need to see you. The CPMC Davies preceptorship, Sutter Mills-Peninsula, Lucile Packard, UCSF St. Mary's — those are your material. Your caregiver work and BHT experience are powerful, but save them for the introduction and the unit-level interview, where the questions get personal.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What They're Looking For</h2>
+      <p>Not perfection. Not the most dramatic story in the room. They've heard thousands of these. What makes an answer stay with a hiring manager is specificity — the moment you describe that could only be yours.</p>
+      <p>Your instinct to walk over and lower yourself to her level. To speak Tagalog in a place where no one expected it. The fact that you noticed he was getting quiet before the game board went flying — and that you've been paying attention to that kind of quiet ever since.</p>
+      <p>That's what they mean when they say they're looking for culture fit. They can teach clinical skills. They cannot teach the kind of presence you bring to a room.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════ INTRODUCTION ══════════════ -->
+  <div id="tab-intro" class="tab-panel">
+    <div class="card">
+      <h2>Your 2-Minute Introduction</h2>
+      <p>This is the first thing they hear from you — before any questions. It's your chance to frame yourself on your own terms, in your own voice. Cover: education → clinical experience → who you are beyond the resume → why you're here.</p>
+      <p>The webinar said to keep it around two minutes and to practice it until it feels natural, not recited. The other thing they mentioned: answer <em>all parts</em> of the prompt. If they ask you to introduce yourself <em>and</em> share what you hope to accomplish in your first year, both parts matter. Don't skip the second one.</p>
+      <div class="callout">
+        Your Japan exchange, your malasakit, your psych and neuroscience background — these aren't extras. They're the things that make your introduction sound like it belongs to you and not to anyone else in that Zoom room.
+      </div>
+
+      <h3>Things to weave in</h3>
+      <ul>
+        <li>Samuel Merritt ABSN (May 2025), Summa Cum Laude — and your BA in Psychology with a Neuroscience minor from USF, which is a real differentiator for this medicine panel</li>
+        <li>Senior preceptorship at CPMC Davies ICU/TICU — high-acuity, rapid response, ventilator management. That's your anchor.</li>
+        <li>The breadth: Lucile Packard for peds, Zuckerberg for OB, UCSF St. Mary's for mental health, community health at the shelter. You've seen a lot for a new grad.</li>
+        <li>Four years as a caregiver at Lake Merritt — caring for people with Alzheimer's, Parkinson's, schizophrenia. That's not a side job, that's a foundation.</li>
+        <li>Japan exchange — cross-cultural communication, humility, adaptability with diverse populations</li>
+        <li>Sigma Theta Tau, AACN, Peer Tutor — you gave back while you were still learning</li>
+        <li>Your <em>why</em> for medicine and neurology — connect your academic background here</li>
+        <li>What you hope to accomplish in your first year — be genuine, be specific</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Your Words</h2>
+      <p>These phrases came directly from your cover letters and essays — they're already yours. You don't have to reach for them; you just have to remember they're there.</p>
+      <div class="callout callout-rose" style="margin-bottom:0.6rem;">
+        <strong>"Small, consistent acts of care could make a meaningful difference."</strong><br>
+        <span style="font-size:0.85rem;">Use this when you talk about your caregiver years or your nursing philosophy. It's more specific than "I care about patients" — and it actually sounds like you.</span>
+      </div>
+      <div class="callout callout-rose" style="margin-bottom:0.6rem;">
+        <strong>"Slow down, listen more carefully, and think about what support actually looks like for each person."</strong><br>
+        <span style="font-size:0.85rem;">This is your bottom cookie for almost any advocacy or service recovery story. It's your learning, not a lesson from a textbook.</span>
+      </div>
+      <div class="callout callout-rose" style="margin-bottom:0.6rem;">
+        <strong>"I am most drawn to the human side of care — taking the time to understand what a patient is going through and helping them feel supported."</strong><br>
+        <span style="font-size:0.85rem;">This is your nursing philosophy in one sentence. Use it in your introduction when you talk about your why.</span>
+      </div>
+      <div class="callout callout-rose" style="margin-bottom:0.6rem;">
+        <strong>"Read situations as they unfold and adapt your approach, rather than relying on a single plan."</strong><br>
+        <span style="font-size:0.85rem;">Perfect framing for your BHT story (Connect Four), or any clinical judgment answer. It turns an error into a skill.</span>
+      </div>
+      <div class="callout callout-rose" style="margin-bottom:0.6rem;">
+        <strong>"How much consistency and presence can shape a patient's experience."</strong><br>
+        <span style="font-size:0.85rem;">Use this in your compassionate care story or as a reflection in any bottom cookie. It's quiet and it lands.</span>
+      </div>
+      <div class="callout callout-rose">
+        <strong>"Being present, attentive, and responsive to each individual's needs."</strong><br>
+        <span style="font-size:0.85rem;">This is how you define good nursing — in your own words. It fits almost any question about values or teamwork.</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Your Draft</h2>
+      <p style="font-size:0.88rem; color:#8B7E7A;">Edit this freely. It saves automatically as you type.</p>
+      <textarea id="intro-text" rows="13"></textarea>
+      <div id="intro-wc" style="font-size:0.8rem; color:#9B8E8A; margin:0.3rem 0 0; font-family:'Inter',sans-serif;"></div>
+
+      <h3 style="margin-top:1.5rem;">2-Minute Timer</h3>
+      <div class="timer-display timer-rose" id="intro-timer">2:00</div>
+      <div class="timer-track track-rose"><div class="timer-fill" id="intro-fill"></div></div>
+      <button class="btn btn-rose" onclick="startIntroTimer()">Start</button>
+      <button class="btn btn-outline-rose" onclick="pauseIntroTimer()">Pause</button>
+      <button class="btn btn-outline-rose" onclick="resetIntroTimer()">Reset</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ METHOD ══════════════ -->
+  <div id="tab-method" class="tab-panel">
+    <div class="card">
+      <h2>The Ice Cream Sandwich</h2>
+      <p>Three parts. The middle is where you live. Keep the cookies thin — they're just context, not the point.</p>
+
+      <div class="layer layer-cookie">
+        <div class="layer-title">🍪 Top Cookie — Set the scene</div>
+        Where were you? What was the situation, and why did it matter? Two or three sentences. Just enough so they know where they are in the story.
+        <div class="layer-note">Don't overload this part. The instinct is to over-explain the setup. Resist it.</div>
+      </div>
+
+      <div class="layer layer-ice">
+        <div class="layer-title">🍦 Ice Cream — What you did (this is the whole point)</div>
+        What did <em>you</em> notice? What did you decide? What did you do and say? Walk them through your actual thinking — not just the actions, but why you made the choices you made.
+        <div class="layer-note">Own every verb. "I walked over. I lowered myself to her level. I held her hand." Not "my preceptor suggested" or "the team decided." You. Even when your preceptor was there — what did you observe, think, and do?</div>
+      </div>
+
+      <div class="layer layer-cookie">
+        <div class="layer-title">🍪 Bottom Cookie — What happened, and what stayed with you</div>
+        What was the outcome? And more importantly — what did you learn, and how has it changed how you show up now?
+        <div class="layer-note">This is where the authentic part lives. Ask yourself: why is this the story I'm still thinking about? The answer to that question is usually the best sentence in your response.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Your Malasakit Story — Built Out</h2>
+      <p style="font-size:0.9rem; color:#8B7E7A; margin-bottom:1rem;">This is your Essay 1 moment, shaped into a panel answer. It's a strong fit for: compassionate care, cultural humility, patient advocacy, clinical judgment, and your nursing philosophy. Practice it until it sounds like a conversation, not a script.</p>
+
+      <div class="layer layer-cookie">
+        <div class="layer-title">🍪 Top Cookie</div>
+        During my senior preceptorship at CPMC Davies, I was caring for a patient who had been intubated after sepsis progressed to ARDS. She had just been extubated, and the unit was busy — alarms going off, call lights on, tasks piling up. She was confused, scared, and reaching for her oxygen tubing.
+      </div>
+
+      <div class="layer layer-ice">
+        <div class="layer-title">🍦 Ice Cream</div>
+        <p style="margin-top:0;">I recognized that she wasn't being difficult. She had woken up somewhere she didn't recognize, without her family, with no memory of the last few days. That is genuinely terrifying. I couldn't just walk past.</p>
+        <p>I walked over, lowered myself to her level, and held her hand. I spoke to her in Tagalog — the kind of phrases I grew up hearing, the ones my mom or grandma would use to say <em>you're okay, I'm here.</em> "Ma'am, you're safe. Nandito ka sa ospital." I kept my voice calm and steady. I stayed with her, repeating simple grounding phrases, until I could see the panic in her eyes start to ease. Her breathing slowed. She stopped fighting the tubing.</p>
+      </div>
+
+      <div class="layer layer-cookie">
+        <div class="layer-title">🍪 Bottom Cookie</div>
+        Her breathing stabilized and she was able to cooperate with her care. But what stayed with me was simpler than that. Even in a high-acuity environment — maybe especially in one — patients are still experiencing fear and confusion in a very real way. Sometimes what they need most isn't another intervention. It's just to know they're not alone. I've tried to carry that into every shift since. Even when things are busy, I try to slow down and actually be present. That's become part of how I practice.
+      </div>
+
+      <div class="callout callout-rose" style="margin-top:1.25rem;">
+        This story works for multiple questions. If they ask about compassionate care — this. Cultural humility — this. A time you connected with a patient — this. A moment that shaped your nursing practice — this. Know it well enough that you can start anywhere in it.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What Makes an Answer Strong</h2>
+      <ul>
+        <li>It's a real, specific moment — not "generally" or "whenever I…"</li>
+        <li>You are the subject of almost every sentence</li>
+        <li>They can follow your thinking, not just your actions</li>
+        <li>Patient safety is somewhere in it, even implicitly</li>
+        <li>It ends with something you actually learned — something that changed you</li>
+      </ul>
+      <div class="callout">
+        Stories don't need to be dramatic. The moment you noticed someone getting quieter and chose to stay — that's a story. The moment you asked for help before you were sure you needed it — that's a story. Small moments handled thoughtfully are more compelling than over-the-top scenarios that sound rehearsed.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ STORY BANK ══════════════ -->
+  <div id="tab-stories" class="tab-panel">
+    <div class="card">
+      <h2>Story Bank</h2>
+      <p>Eleven interview themes, each mapped to your actual experiences. Click a card to expand it. The notes field at the bottom of each card is yours to edit — it saves automatically.</p>
+      <p style="font-size:0.88rem; color:#8B7E7A;">The panel will ask 4 questions. You won't know which themes until they're asked — but you'll have heard 3 of them before yours. Having a story ready for each of these means nothing will catch you off guard.</p>
+    </div>
+
+    <div class="card">
+      <h2>Story Flexibility Map</h2>
+      <p>You don't need 11 separate stories. A few strong ones stretch to cover multiple themes. Know these 4 deeply — everything else is backup.</p>
+      <div style="overflow-x:auto; margin-top:0.75rem;">
+        <table style="width:100%; border-collapse:collapse; font-family:'Inter',sans-serif; font-size:0.83rem;">
+          <thead>
+            <tr style="background:#FAF7F2;">
+              <th style="text-align:left; padding:0.55rem 0.75rem; border-bottom:2px solid #EDE8E3; color:#9B8E8A; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; font-size:0.72rem; min-width:140px;">Story</th>
+              <th style="padding:0.55rem 0.6rem; border-bottom:2px solid #EDE8E3; color:#C4746E; font-weight:600; font-size:0.75rem; text-align:center;">Compassionate<br>Care</th>
+              <th style="padding:0.55rem 0.6rem; border-bottom:2px solid #EDE8E3; color:#C4746E; font-weight:600; font-size:0.75rem; text-align:center;">Safety &amp;<br>Escalation</th>
+              <th style="padding:0.55rem 0.6rem; border-bottom:2px solid #EDE8E3; color:#C4746E; font-weight:600; font-size:0.75rem; text-align:center;">Teamwork &amp;<br>Priorities</th>
+              <th style="padding:0.55rem 0.6rem; border-bottom:2px solid #EDE8E3; color:#C4746E; font-weight:600; font-size:0.75rem; text-align:center;">Advocacy &amp;<br>Cultural</th>
+              <th style="padding:0.55rem 0.6rem; border-bottom:2px solid #EDE8E3; color:#C4746E; font-weight:600; font-size:0.75rem; text-align:center;">Error &amp;<br>Judgment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F5F0EC;">
+              <td style="padding:0.55rem 0.75rem; font-weight:600; color:#3A3330;">Malasakit — Tagalog patient, CPMC Davies ICU <span style="font-size:0.7rem; background:#F0D4D2; color:#8B3A35; border-radius:8px; padding:0.1rem 0.45rem; margin-left:0.3rem;">Lead</span></td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F5F0EC; background:#FDFCFB;">
+              <td style="padding:0.55rem 0.75rem; font-weight:600; color:#3A3330;">Rapid response / escalation — CPMC Davies</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F5F0EC;">
+              <td style="padding:0.55rem 0.75rem; font-weight:600; color:#3A3330;">Japan exchange + Tagalog patient</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F5F0EC; background:#FDFCFB;">
+              <td style="padding:0.55rem 0.75rem; font-weight:600; color:#3A3330;">Homeless shelter — Community Health rotation</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+            </tr>
+            <tr>
+              <td style="padding:0.55rem 0.75rem; font-weight:600; color:#3A3330;">Connect Four / BHT — error in judgment <span style="font-size:0.7rem; background:#FFF0C0; color:#7A5A00; border-radius:8px; padding:0.1rem 0.45rem; margin-left:0.3rem;">⚠ not clinical</span></td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#9B8E8A;">—</td>
+              <td style="text-align:center; color:#7A9E7E; font-size:1rem;">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:1rem;">
+        The Malasakit story is your most flexible. If you only had time to master one — it's that one. The escalation story is your second must-know, because safety questions are almost guaranteed.
+      </div>
+    </div>
+
+    <div class="sb-grid">
+
+      <!-- 1. Compassionate Care -->
+      <div class="sb-card lead open" id="sbc-0">
+        <div class="sb-header" onclick="toggleSB(0)">
+          <span class="sb-theme">Compassionate Care <span class="sb-badge badge-lead">Lead Story</span></span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">Senior Preceptorship · CPMC Davies ICU/TICU · Essay 1</div>
+          <ul class="sb-beats">
+            <li>Recognized fear, not defiance — she was disoriented, not difficult</li>
+            <li>Walked over, lowered to her level, held her hand</li>
+            <li>"Ma'am, you're safe. Nandito ka sa ospital." / "Okay lang… nandito ako."</li>
+            <li>Kept voice calm and steady; stayed present until panic eased</li>
+            <li>Breathing slowed; she stopped fighting the tubing; focused on my voice</li>
+          </ul>
+          <div class="sb-note sb-note-gold">This is your most flexible story. Compassionate care, cultural humility, advocacy, clinical judgment, "what nursing means to you" — it stretches to fit all of them. Know it until it sounds like a conversation, not a script.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-0" placeholder="Add your own notes or reminders…" oninput="saveStoryNote(0)"></textarea>
+          <div class="sb-saved" id="sbsaved-0">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 2. Safety / Escalation -->
+      <div class="sb-card" id="sbc-1">
+        <div class="sb-header" onclick="toggleSB(1)">
+          <span class="sb-theme">Safety &amp; Escalation</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">Senior Preceptorship · CPMC Davies ICU/TICU</div>
+          <ul class="sb-beats">
+            <li>Noticed a specific change — a vital sign, an assessment finding, a feeling something was off</li>
+            <li>Didn't dismiss it; stopped and investigated</li>
+            <li>Recognized the concern was beyond my scope to manage alone</li>
+            <li>Communicated clearly with SBAR to preceptor / charge nurse</li>
+            <li>Stayed with patient; assisted with interventions; kept safety as the throughline</li>
+          </ul>
+          <div class="sb-note sb-note-gold">Lead with the specific cue that triggered your concern — the detail that only you noticed. That's what makes an escalation story yours instead of a generic one.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-1" placeholder="Which patient? What did you notice first?" oninput="saveStoryNote(1)"></textarea>
+          <div class="sb-saved" id="sbsaved-1">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 3. Multiple Priorities -->
+      <div class="sb-card" id="sbc-2">
+        <div class="sb-header" onclick="toggleSB(2)">
+          <span class="sb-theme">Multiple Priorities</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">CPMC Davies ICU/TICU · Also Med-Surg I/II/III at Sutter Mills-Peninsula</div>
+          <ul class="sb-beats">
+            <li>Recognized competing demands in real time</li>
+            <li>Prioritized by acuity — assessed the most critical patient first</li>
+            <li>Communicated with the team about what couldn't wait</li>
+            <li>Delegated or flagged appropriately; kept patient safety at center</li>
+            <li>Checked back; closed the loop</li>
+          </ul>
+          <div class="sb-note sb-note-gold">Walk through your actual thought process — what did you do FIRST and why? That reasoning is the whole ice cream. Don't just list the tasks you juggled.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-2" placeholder="Which rotation? What were the two competing priorities?" oninput="saveStoryNote(2)"></textarea>
+          <div class="sb-saved" id="sbsaved-2">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 4. Teamwork -->
+      <div class="sb-card" id="sbc-3">
+        <div class="sb-header" onclick="toggleSB(3)">
+          <span class="sb-theme">Teamwork</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">CPMC Davies — rapid response or complex patient coordination</div>
+          <ul class="sb-beats">
+            <li>Recognized the situation required team response</li>
+            <li>Communicated a clear, organized change-of-condition report</li>
+            <li>Knew when to stay with my patient vs. hand off</li>
+            <li>Remained accountable for my patient while the team responded</li>
+            <li>Contributed something specific — information, preparation, presence</li>
+          </ul>
+          <div class="sb-note sb-note-gold">Mentioning your preceptor is fine — you weren't supposed to be alone. Just make sure your actions and your decisions are the subject of the story, not theirs.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-3" placeholder="What was your specific role in the team response?" oninput="saveStoryNote(3)"></textarea>
+          <div class="sb-saved" id="sbsaved-3">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 5. Advocacy -->
+      <div class="sb-card" id="sbc-4">
+        <div class="sb-header" onclick="toggleSB(4)">
+          <span class="sb-theme">Advocacy</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">Community Health rotation · First Presbyterian Homeless Shelter (clinical) · HCEB volunteer as backup</div>
+          <ul class="sb-beats">
+            <li>Recognized a patient's unmet need or a barrier they couldn't navigate alone</li>
+            <li>Chose to act rather than move on</li>
+            <li>Connected them to a resource, spoke up on their behalf, or followed through when others didn't</li>
+            <li>Checked back in; didn't just hand off and disappear</li>
+          </ul>
+          <div class="sb-note sb-note-rose">If the question says "during your clinical rotation" — use the Community Health rotation (First Presbyterian). HCEB is meaningful but it's volunteer work. Know the distinction and have both ready.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-4" placeholder="What did the patient need that wasn't being addressed?" oninput="saveStoryNote(4)"></textarea>
+          <div class="sb-saved" id="sbsaved-4">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 6. Cultural Humility -->
+      <div class="sb-card" id="sbc-5">
+        <div class="sb-header" onclick="toggleSB(5)">
+          <span class="sb-theme">Cultural Humility</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">Japan exchange (Hamamatsu, June 2025) · Filipino patient — malasakit story · HCEB multilingual clients</div>
+          <ul class="sb-beats">
+            <li>Recognized a cultural or linguistic gap — didn't assume one approach fits all</li>
+            <li>Adapted: language, pace, communication style, level of family involvement</li>
+            <li>Used personal background as a clinical tool, not just a detail about myself</li>
+            <li>Patient or family felt seen and understood</li>
+          </ul>
+          <div class="sb-note sb-note-gold">The Japan exchange was an academic program specifically focused on cross-cultural communication and global healthcare — name it directly. It's a credential, not just a trip. Combined with the malasakit story, you have two strong examples for this theme.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-5" placeholder="Japan exchange, malasakit story, HCEB — which fits the question best?" oninput="saveStoryNote(5)"></textarea>
+          <div class="sb-saved" id="sbsaved-5">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 7. Error in Judgment -->
+      <div class="sb-card warning-card" id="sbc-6">
+        <div class="sb-header" onclick="toggleSB(6)">
+          <span class="sb-theme">Error in Judgment <span class="sb-badge badge-warn">⚠ See note</span></span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">BHT role · Center for Learning and Autism Support Services · Essay 2 (NOT clinical — read note)</div>
+          <ul class="sb-beats">
+            <li>Noticed early signs of overwhelm (quieter, avoiding eye contact, restless hands) but kept prompting</li>
+            <li>Child escalated — board knocked over, session broke down</li>
+            <li>Recognized the mistake in real time: what I thought was consistency was rigidity</li>
+            <li>Removed demands; lowered voice; shifted to bubbles (a known de-escalator)</li>
+            <li>Rebuilt engagement slowly, at his pace</li>
+            <li>Now: I pay attention to those early signals and adjust before escalation happens</li>
+          </ul>
+          <div class="sb-note sb-note-rose">This is professional experience, not a clinical rotation. If the question says "during your clinical rotation," use a near-miss or judgment call from CPMC Davies instead. But if the question is broader — "tell me about a time you made an error in judgment" — this story is strong and the learning translates directly to nursing.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-6" placeholder="Do you have a clinical near-miss from CPMC Davies as a backup?" oninput="saveStoryNote(6)"></textarea>
+          <div class="sb-saved" id="sbsaved-6">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 8. Service Recovery -->
+      <div class="sb-card" id="sbc-7">
+        <div class="sb-header" onclick="toggleSB(7)">
+          <span class="sb-theme">Service Recovery</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">Caregiver role · Lake Merritt Care Home · Also CPMC Davies family moments</div>
+          <ul class="sb-beats">
+            <li>Family member or patient was upset, frustrated, or felt unheard</li>
+            <li>Listened fully — didn't interrupt or jump to fix</li>
+            <li>Acknowledged feelings before addressing the problem</li>
+            <li>Provided a clear, honest update and set expectations</li>
+            <li>Escalated to the right person if needed; followed through</li>
+          </ul>
+          <div class="sb-note sb-note-gold">The sequence matters: listen, acknowledge, then address. If your answer shows you tried to fix before you listened, it misses the point. Show that you know the difference.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-7" placeholder="Which patient or family situation comes to mind?" oninput="saveStoryNote(7)"></textarea>
+          <div class="sb-saved" id="sbsaved-7">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 9. Communication Challenge -->
+      <div class="sb-card" id="sbc-8">
+        <div class="sb-header" onclick="toggleSB(8)">
+          <span class="sb-theme">Communication Challenge</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">CPMC Davies ICU — communicating with providers, navigating handoffs under pressure</div>
+          <ul class="sb-beats">
+            <li>Identified a barrier: urgency wasn't being matched, or I wasn't being understood</li>
+            <li>Chose the right communication mode (in person vs. phone vs. message)</li>
+            <li>Used SBAR — organized, clear, with a recommendation</li>
+            <li>Confirmed understanding; followed up if needed</li>
+            <li>Kept patient safety as the reason I didn't let it go</li>
+          </ul>
+          <div class="sb-note sb-note-gold">This question is also about emotional intelligence — how did you stay professional when the conversation was difficult? That composure is part of the answer they're looking for.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-8" placeholder="A challenging handoff, a provider call that required persistence?" oninput="saveStoryNote(8)"></textarea>
+          <div class="sb-saved" id="sbsaved-8">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 10. Delegation -->
+      <div class="sb-card" id="sbc-9">
+        <div class="sb-header" onclick="toggleSB(9)">
+          <span class="sb-theme">Delegation &amp; Resources</span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">CPMC Davies — preceptor, charge nurse, rapid response team</div>
+          <ul class="sb-beats">
+            <li>Recognized a task was beyond my scope, or a team member was better positioned</li>
+            <li>Communicated the need clearly — didn't just hand off and disappear</li>
+            <li>Maintained accountability for my patient throughout</li>
+            <li>Recognized that asking for help was the clinical judgment, not a failure</li>
+          </ul>
+          <div class="sb-note sb-note-gold">"Asking for help was my clinical decision." That reframe is the bottom cookie. New nurses who understand this are the ones hiring managers actually want on their unit.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-9" placeholder="A moment you recognized your limit and acted on it?" oninput="saveStoryNote(9)"></textarea>
+          <div class="sb-saved" id="sbsaved-9">Saved ✓</div>
+        </div>
+      </div>
+
+      <!-- 11. Leadership -->
+      <div class="sb-card" id="sbc-10">
+        <div class="sb-header" onclick="toggleSB(10)">
+          <span class="sb-theme">Leadership <span class="sb-badge badge-warn">Intro / Unit Level</span></span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">PSA Co-Chair at USF (200+ members, 200hrs) · Peer Tutor at Samuel Merritt · Sigma Theta Tau</div>
+          <ul class="sb-beats">
+            <li>Co-led a 200+ member student organization — coordinated events with faculty, created newsletters reaching 500+ students</li>
+            <li>Peer tutored nursing students across MCA I–III, peds, maternity — used teach-back, direct and indirect instruction</li>
+            <li>Member of Sigma Theta Tau and AACN — chose to invest in professional identity while still in school</li>
+          </ul>
+          <div class="sb-note sb-note-gold">This card is best used in your introduction and at the unit-level interview, where the conversation gets personal and they ask about your resume. It's not a typical panel answer unless a question opens the door — but it's part of who you are.</div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-10" placeholder="How do you want to mention your leadership in your intro?" oninput="saveStoryNote(10)"></textarea>
+          <div class="sb-saved" id="sbsaved-10">Saved ✓</div>
+        </div>
+      </div>
+
+    </div><!-- end .sb-grid -->
+  </div>
+
+  <!-- ══════════════ PRACTICE ══════════════ -->
+  <div id="tab-practice" class="tab-panel">
+    <div class="card">
+      <h2>Practice Mode</h2>
+      <p>Draw a question. Answer out loud. Aim for two minutes. The goal isn't perfection — it's getting comfortable enough that the surprise factor disappears, and your personality can come through instead of your nerves.</p>
+      <blockquote>
+        "I practiced those answers hundreds of times. By the time I was in the actual interview, it felt like second nature. I knew all my answers were going to be under two minutes and I just felt comfortable."
+        <cite>— Corey, Medical Oncology, Stanford Healthcare NRP</cite>
+      </blockquote>
+
+      <button class="btn btn-rose" onclick="drawQuestion()">Draw a Random Question</button>
+      <div id="question-display">Press "Draw a Random Question" above, or browse the Question Bank below to choose a specific one.</div>
+      <div id="session-counter"></div>
+
+      <h3>2-Minute Timer</h3>
+      <div class="timer-display timer-sage" id="practice-timer">2:00</div>
+      <div class="timer-track track-sage"><div class="timer-fill" id="practice-fill"></div></div>
+      <button class="btn btn-sage" onclick="startPracticeTimer()">Start</button>
+      <button class="btn btn-outline-sage" onclick="pausePracticeTimer()">Pause</button>
+      <button class="btn btn-outline-sage" onclick="resetPracticeTimer()">Reset</button>
+    </div>
+
+    <div class="card">
+      <h2>Answer Builder</h2>
+      <p style="font-size:0.88rem; color:#8B7E7A;">Use this as a scratch pad while you work through a story. It saves automatically.</p>
+      <div class="field-label">🍪 Top Cookie — set the scene</div>
+      <textarea id="ab-top" rows="3" placeholder="Where, what, why it mattered — 2–3 sentences."></textarea>
+      <div class="field-label">🍦 Ice Cream — your actions and thinking</div>
+      <textarea id="ab-ice" rows="6" placeholder="I noticed… I recognized… I decided… I said… Walk through your thinking, not just the steps."></textarea>
+      <div class="field-label">🍪 Bottom Cookie — outcome and what you learned</div>
+      <textarea id="ab-bot" rows="3" placeholder="What happened. What stayed with you. How it changed how you show up."></textarea>
+      <div style="margin-top:0.75rem;">
+        <button class="btn btn-outline-rose" onclick="clearAnswerBuilder()">Clear</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Your Flashcards</h2>
+      <p>Add your own practice questions here — they'll go into the draw pool above.</p>
+      <div class="field-label">Question</div>
+      <textarea id="fc-question" rows="2" placeholder="Tell me about a time during your clinical rotation when…"></textarea>
+      <div class="field-label">Notes (optional)</div>
+      <textarea id="fc-notes" rows="2" placeholder="Which story to use, key beats to hit…"></textarea>
+      <div style="margin-top:0.75rem;">
+        <button class="btn btn-rose" onclick="addFlashcard()">Add to Practice Pool</button>
+      </div>
+      <div id="fc-list" style="margin-top:1.25rem;"></div>
+    </div>
+
+    <div class="card">
+      <h2>Question Bank</h2>
+      <p style="font-size:0.88rem; color:#8B7E7A; margin-bottom:0.25rem;">All 16 built-in questions grouped by theme, plus your custom cards. Click <strong style="font-weight:600;">Load →</strong> to send any question into the practice area above.</p>
+      <h3>Built-in Questions (16)</h3>
+      <div id="qb-builtin"></div>
+      <h3 style="margin-top:1.25rem;">Your Custom Cards</h3>
+      <div id="qb-custom"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ MINDSET ══════════════ -->
+  <div id="tab-mindset" class="tab-panel">
+    <div class="card">
+      <h2>On Being Nervous</h2>
+      <p>You're going to be nervous. Everyone on that call is nervous. The managers have run hundreds of these — they know what nerves look like, and they're not counting it against you. What they're paying attention to is how you show up through the nerves.</p>
+      <blockquote>
+        "Frame the entire interview as a conversation. I'm talking about experiences I've been through. I know what I'm talking about — I lived these stories. So I just have to talk about them."
+        <cite>— Angie, Trauma &amp; General Surgery, Stanford Healthcare NRP</cite>
+      </blockquote>
+      <blockquote>
+        "There's nothing wrong with taking a deep breath before answering. You can even ask for the question to be repeated — it gives you a beat. Sometimes people feel like they have to answer immediately, but just taking that moment makes a real difference."
+        <cite>— Corey, Medical Oncology, Stanford Healthcare NRP</cite>
+      </blockquote>
+      <div class="callout callout-rose">
+        You were selected from over 2,000 applications. You are supposed to be there.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Being in a Room with Other Candidates</h2>
+      <p>There will be 4–5 of you on the call at once. You'll hear each other's answers. You might hear something that sounds more impressive than what you had planned. Here's the thing:</p>
+      <blockquote>
+        "Be prepared that everyone in that room is going to be impressive. But that doesn't take anything away from you. Anticipate it — so it doesn't catch you off guard. And don't change your answer after hearing someone else's. Stick with what you practiced. You know the story."
+        <cite>— Angie</cite>
+      </blockquote>
+      <p>Be engaged — nod, smile, be present. But stay in your own lane. The story that's yours, that actually happened to you, told with your real voice — that's what they remember.</p>
+    </div>
+
+    <div class="card">
+      <h2>If You Get Stuck</h2>
+      <ul>
+        <li>Ask for the question to be repeated. It's completely fine and buys you a moment.</li>
+        <li>Never say "I haven't experienced that." Take a breath and find the closest thing you have.</li>
+        <li>Your stories are more flexible than you think. A good story can stretch to answer more than one kind of question.</li>
+        <li>The context (top cookie) is not the point — don't linger there if you lose your place. Come back to what you did.</li>
+      </ul>
+      <div class="callout callout-sage">
+        <strong>Laticia, the program coordinator:</strong> "They can teach skills. They can't make you be your unique personality. The more you can show yourself, the better — that's genuinely what they're selecting for."
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ DAY-OF ══════════════ -->
+  <div id="tab-dayof" class="tab-panel">
+
+    <div class="card">
+      <h2>The Night Before</h2>
+      <p style="font-size:0.88rem; color:#8B7E7A;">Do these the evening of July 27th, then let it go.</p>
+      <div class="checklist-item"><input type="checkbox" id="nb1"><label for="nb1">Read through your introduction out loud — once, not ten times</label></div>
+      <div class="checklist-item"><input type="checkbox" id="nb2"><label for="nb2">Review the beats for your 2–3 go-to stories (Compassionate Care, your Safety story, one more)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="nb3"><label for="nb3">Confirm your Zoom link is saved and your name is set correctly in your profile</label></div>
+      <div class="checklist-item"><input type="checkbox" id="nb4"><label for="nb4">Set out your outfit and anything you need for the space</label></div>
+      <div class="checklist-item"><input type="checkbox" id="nb5"><label for="nb5">Get to sleep at a reasonable hour — rest is preparation</label></div>
+      <div class="callout callout-rose" style="margin-top:1rem;">
+        You've already done the work. The night before isn't for learning new things — it's for trusting what you already know.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Day-Of Checklist</h2>
+      <p style="font-size:0.88rem; color:#8B7E7A;">Saves automatically as you check things off.</p>
+
+      <h3>Space</h3>
+      <div class="checklist-item"><input type="checkbox" id="d1"><label for="d1">Quiet space confirmed — no foot traffic, alarms, or unexpected noise</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d2"><label for="d2">Lighting tested at 3 PM — face is well lit, no backlight from a window behind you</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d3"><label for="d3">Housemates and pets sorted out of range</label></div>
+
+      <h3>Tech</h3>
+      <div class="checklist-item"><input type="checkbox" id="d4"><label for="d4">Full name set in Zoom profile (not a nickname or old display name)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d5"><label for="d5">Device fully charged or plugged in</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d6"><label for="d6">Hotspot ready as a backup if Wi-Fi drops</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d7"><label for="d7">Zoom link confirmed — specific to your time slot, do not share it</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d8"><label for="d8">Junk/spam folder checked for the calendar invite (sent within 24h of accepting)</label></div>
+
+      <h3>You</h3>
+      <div class="checklist-item"><input type="checkbox" id="d9"><label for="d9">Professional attire — dress as if it were in person</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d10"><label for="d10">Notebook and pen nearby — for memory jogs, not to read from</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d11"><label for="d11">Log in no earlier than 5 minutes before 3:00 PM</label></div>
+
+      <div class="callout" style="margin-top:1.25rem;">
+        Once you're in the waiting room — breathe. The facilitator will bring everyone in, introduce the hiring managers, and explain the format. You have a moment to settle before anything starts.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>If You Advance to Phase 2</h2>
+      <p>The hiring manager will call you. The in-person interview is a different energy — Corey described it as "more of a vibe check, a get-to-know-you, will you be a good fit." Angie said she was laughing and talking and asking them questions right back.</p>
+      <p>You can repeat a story from Phase 1 if it comes up again — they understand. And here, unlike Phase 1, you get to ask questions.</p>
+      <h3>Questions worth asking</h3>
+      <ul>
+        <li>What makes a new grad resident successful on this unit?</li>
+        <li>What challenges do residents typically face in the first few months?</li>
+        <li>What do the current nurses say they love about working here?</li>
+        <li>What are the unit's goals right now?</li>
+        <li>What does support look like after orientation ends?</li>
+      </ul>
+      <div class="callout">
+        Send a thank-you email. When the manager calls to invite you, they'll follow up by email. Just reply to that thread after the interview — brief is fine.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ KNOW STANFORD ══════════════ -->
+  <div id="tab-stanford" class="tab-panel">
+    <div class="card">
+      <h2>Stanford's Values</h2>
+      <p>You don't need to memorize this and name-drop it in the interview. But understanding what Stanford is actually about changes how naturally your answers can connect to what they care about.</p>
+
+      <p style="font-style:italic; font-size:1.05rem; color:#C4746E; margin:1rem 0 0.25rem;">"Healing humanity through science and compassion, one patient at a time."</p>
+      <p style="font-size:0.85rem; color:#8B7E7A; margin:0 0 1rem;">— Stanford Healthcare mission</p>
+
+      <p style="font-style:italic; font-size:1.05rem; color:#7A9E7E; margin:0 0 0.25rem;">"To Care. To Educate. To Discover."</p>
+      <p style="font-size:0.85rem; color:#8B7E7A; margin:0 0 1rem;">— Stanford Nursing mission</p>
+
+      <p>Stanford's nursing model is built on <strong>Jean Watson's Caring Science</strong> — genuine human connection as a clinical act, not a soft extra. Their professional practice framework is called <em>Nursing Excellence Requires a Caring HEART.</em></p>
+
+      <div class="callout callout-rose">
+        The malasakit story you wrote in your application essay — holding her hand, speaking Tagalog, choosing to slow down when the unit was busy — that <em>is</em> Caring Science. You already live this. You don't need to cite Watson. Your nursing philosophy and Stanford's care model are the same thing described in different languages.
+      </div>
+
+      <p>Stanford received its <strong>5th Magnet with Distinction redesignation in 2024</strong> — the highest level from the ANCC. The residency program itself holds ANCC accreditation with distinction, with the ANCC specifically noting the program's holistic approach to resident wellness. This is a hospital and a program that invests in nurses.</p>
+    </div>
+
+    <div class="card">
+      <h2>Your Three Units</h2>
+
+      <h3>Advanced Lung Disease</h3>
+      <p>Stanford's pulmonary program is nationally ranked. This is the site of the world's first combined heart-lung transplant (1981). The patients are often complex and long-stay — bridging to transplant, managing pulmonary hypertension, enrolled in clinical trials. High acuity, multidisciplinary model. Close in feel to the CPMC Davies environment you came from.</p>
+
+      <h3>Neurology</h3>
+      <p>A center of excellence for over 40 years — stroke, epilepsy, movement disorders, neuro-oncology, autoimmune neurological disease. Deep brain stimulation. Research-integrated care. 60,000+ outpatient visits a year. A new 600-bed facility opened in 2019.</p>
+      <div class="callout callout-sage">
+        Your BA in Psychology with a Neuroscience minor from USF is a genuine differentiator here. Mention it in your introduction when you talk about why this panel drew you. It's not a stretch — it's true.
+      </div>
+
+      <h3>General Medicine</h3>
+      <p>Quaternary referral center — some of the most complex cases in the Bay Area come through here. Acuity-adaptable units. Strong multidisciplinary culture. Your med-surg rotations at Sutter Mills-Peninsula (three of them) give you a real foundation to speak to.</p>
+    </div>
+
+    <div class="card">
+      <h2>Personal Notes</h2>
+      <p style="font-size:0.88rem; color:#8B7E7A;">Reflections, things to remember, feedback from practice. Saves automatically.</p>
+      <textarea id="notes-text" rows="10" placeholder="Your notes here…"></textarea>
+    </div>
+  </div>
+
+  <!-- ══════════════ WEBINAR NOTES ══════════════ -->
+  <div id="tab-webinar" class="tab-panel">
+    <div class="card">
+      <h2>From the Stanford NRP Webinar</h2>
+      <p style="color:#8B7E7A; font-size:0.9rem;">Hosted by Laticia Cortez and Christy Norris (Nursing Professional Development Specialists), with residents Corey and Angie. Recorded July 2026 for Cohort 45.</p>
+
+      <h3>Cohort 45 Timeline</h3>
+      <div class="timeline-row"><span class="timeline-date">Apr 6–12</span><span>Application window open</span></div>
+      <div class="timeline-row"><span class="timeline-date">Mid-July</span><span>Screening complete — 2,000+ applications reviewed</span></div>
+      <div class="timeline-row"><span class="timeline-date">Jul 21–24</span><span>Panel interview invitations sent (rolling, can go out as late as July 24)</span></div>
+      <div class="timeline-row"><span class="timeline-date">Jul 27–30</span><span>Panel interviews (virtual Zoom)</span></div>
+      <div class="timeline-row"><span class="timeline-date">Aug 3–7</span><span>Unit level interviews (in person)</span></div>
+      <div class="timeline-row"><span class="timeline-date">Aug 7</span><span>Final offers to HR</span></div>
+      <div class="timeline-row"><span class="timeline-date">Sep 28</span><span>Cohort 45 start date</span></div>
+    </div>
+
+    <div class="card">
+      <h2>About the Program</h2>
+      <ul>
+        <li>Recognized Vizient Nurse Residency Program since 2006</li>
+        <li>ANCC accreditation with distinction — Transition to Practice program</li>
+        <li>12 months in length</li>
+        <li>Minimum 8 hours/month of classroom sessions — protected time on your schedule, not extra</li>
+        <li>You are hired by the unit manager, not the NRP team. Laticia, Christy, and Carrie don't make the hiring decision.</li>
+        <li>You are hired into a Clinical Nurse 1 position</li>
+        <li>Units include: critical care, adult and pediatric ED, inpatient medicine, surgical and oncology, dialysis, perioperative, clinical trials, psychiatry, cardiovascular OR, infusion services</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Panel Interview — What Was Said</h2>
+
+      <div class="wn-section">
+        <h3>Format</h3>
+        <ul>
+          <li>Virtual via Zoom. Specialty area managers are on the panel.</li>
+          <li>4–5 candidates per panel, same Zoom room</li>
+          <li>4 behavioral questions, asked in rotational sequence — each candidate gets to be "first" on one question</li>
+          <li>You will hear 3 questions before yours — you know what's coming</li>
+          <li>Approximately 1 hour</li>
+          <li>No Q&amp;A at the end. Next steps are provided at close.</li>
+          <li>If a manager wants to advance you, they will call you for a unit-level interview</li>
+        </ul>
+      </div>
+
+      <div class="wn-section">
+        <h3>Zoom Logistics</h3>
+        <ul>
+          <li>Log in no more than 5 minutes early — you'll be in a waiting room until the facilitator opens the room</li>
+          <li>Your name must be visible in your Zoom profile</li>
+          <li>Invites are specific to your date and time — do not share the link</li>
+          <li>Check junk/spam: calendar invite is sent within 24 hours of accepting</li>
+          <li>Charge your device. Have a hotspot ready as backup.</li>
+          <li>Professional attire even though it's virtual — dress as if in person</li>
+          <li>Quiet space, good lighting tested ahead of time (not last minute)</li>
+        </ul>
+      </div>
+
+      <div class="wn-section">
+        <h3>The Introduction</h3>
+        <ul>
+          <li>Each candidate introduces themselves before questions begin</li>
+          <li>This is your opportunity to make a strong first impression and set the tone</li>
+          <li>Include: educational background, relevant work and volunteer experience, additional information that highlights your qualifications and interests</li>
+          <li>It's also a chance to show your personality and begin building a connection</li>
+          <li>Aim for approximately 2 minutes</li>
+          <li>Plan your key points in advance. Practice. Don't wing it.</li>
+          <li><em>Tip from Angie:</em> If the prompt includes "and what you hope to accomplish in your first year" — answer both parts. Don't skip the second.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Behavioral Interviewing — What Was Said</h2>
+
+      <div class="wn-section">
+        <h3>The Format</h3>
+        <p>Questions are phrased as "Tell me about a time when…" or "Give me an example from your previous experience…" They focus on past behavior because past behavior is the best predictor of future behavior.</p>
+        <p>This format is designed to level the playing field — it's general enough that everyone can participate regardless of their specific clinical exposure. There are no trick questions. The questions are broad enough that you'll have encountered something similar.</p>
+      </div>
+
+      <div class="wn-section">
+        <h3>What They're Assessing</h3>
+        <p>Not just clinical skills — also how you approach situations, how you treat others, and how you communicate. Questions will cover both clinical scenarios and broader professional qualities.</p>
+        <p>They are not asking about drug classes, peaks and troughs, or medication indications. Example: <em>"Tell me about a time you had to escalate a clinical concern"</em> — it's about how you responded, not how complex the issue was.</p>
+      </div>
+
+      <div class="wn-section">
+        <h3>Clinical Rotations vs. Other Experience</h3>
+        <p>Focus answers on experiences from your time functioning as a clinical nurse — your nursing school clinicals. If a question specifies "during your clinical rotation," stay there. The panel needs to see you as a nurse, not in a previous role.</p>
+        <p>If you genuinely don't have a clinical example, a similar experience is acceptable — but prioritize clinical material when preparing.</p>
+        <p><em>From Angie:</em> "For the panel, I exclusively pulled from clinical experiences because the questions specified 'during your clinical rotation.' For the unit-level interview I was able to use other experiences because I was asked about my resume directly."</p>
+      </div>
+
+      <div class="wn-section">
+        <h3>If You're Stuck</h3>
+        <p>Pause, think, and respond to the best of your ability. Do not say "I haven't had that experience." The questions are general enough — you've likely observed or participated in something similar, even in nursing school.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Ice Cream Sandwich — Directly from the Webinar</h2>
+      <p>Laticia presented several answer frameworks (STAR, CAR, PAR, SOAR) but used the ice cream sandwich as the working example for the session.</p>
+      <ul>
+        <li><strong>Top Cookie:</strong> Set the scene. Where were you? What was the challenge? Why did it matter? Keep it concise — just enough to frame the story.</li>
+        <li><strong>Ice Cream:</strong> YOUR actions. What was your role? What did you do? How did you think through the situation? Don't just list actions — walk them through your thinking. Show clinical judgment, communication, and initiative.</li>
+        <li><strong>Bottom Cookie:</strong> The outcome, impact, or learning. What happened as a result? What did you achieve or improve? What did you learn or take forward? This shows growth, accountability, and the impact of your story.</li>
+      </ul>
+      <p><strong>Key point from Laticia:</strong> Strong behavioral answers include specific examples (not hypothetical), clear personal actions ("this is what I did"), a patient safety focus, logical decision-making that is visible, and some type of outcome or learning.</p>
+      <p><strong>From Corey:</strong> "I really focused on making the context and setup the smallest part of my answers. The biggest part was: what did I learn and what was the outcome. When you're answering those questions, you can't help but be authentic — because it's your learnings and your experience."</p>
+    </div>
+
+    <div class="card">
+      <h2>Common Interview Themes — From the Webinar</h2>
+      <p>Laticia presented a brainstorming activity asking candidates to think of qualities of a clinical nurse. The themes mentioned directly:</p>
+      <ul>
+        <li>Teamwork</li>
+        <li>Delegation</li>
+        <li>Escalation</li>
+        <li>Advocacy</li>
+        <li>Time management</li>
+        <li>Compassionate care</li>
+        <li>Conflict resolution</li>
+        <li>Reprioritization</li>
+        <li>Resource utilization</li>
+        <li>Effective communication</li>
+        <li>Coordination</li>
+      </ul>
+      <p><em>From Angie when asked directly:</em> "Delegation, escalation, advocacy, teamwork, diversity — caring for someone different from yourself. Those were themes that came up in my interview and come up in a lot of nursing interviews in general."</p>
+    </div>
+
+    <div class="card">
+      <h2>Preparing and Practicing — What Was Said</h2>
+
+      <div class="wn-section">
+        <h3>Prepare</h3>
+        <p>Think of qualities of a clinical nurse. Think of specific experiences where you demonstrated those qualities. Ask yourself: what happened? What part did I play? How did I respond? What was the outcome?</p>
+        <p>Build stories around those experiences using a structured format. Choose stories that are not overly complicated — if it's hard for you to tell, it'll be hard for them to follow. You should be the key player in every story.</p>
+        <p>Develop your scenarios to be impactful. Ask yourself: why does this story still stand out to me? Why would a management team be interested in this question? What else can I share to add depth?</p>
+      </div>
+
+      <div class="wn-section">
+        <h3>Practice</h3>
+        <ul>
+          <li>Write questions for each theme (e.g., "Tell me about a time you advocated for a patient"). Put them in a jar, a bag, an app — and draw them at random.</li>
+          <li>Practice out loud, in front of a mirror (so you can see your expressions and body language)</li>
+          <li>Record yourself — uncomfortable, but it shows you things a mirror can't: the "ums," the eye contact, whether you're connecting through a camera</li>
+          <li>Practice with a friend — they can draw random questions and give feedback</li>
+          <li>Practice anywhere: in the car, waiting for a coffee, sitting on the porch. The goal is reducing the surprise factor.</li>
+          <li>Aim for answers that land comfortably under 2 minutes</li>
+        </ul>
+        <blockquote>
+          "I recorded myself and I was like, okay, this is very robotic. But you will be talking to a camera on interview day. So it's helpful to just get that out of the way and break that seal."
+          <cite>— Angie</cite>
+        </blockquote>
+      </div>
+
+      <div class="wn-section">
+        <h3>Organizing Stories by Theme</h3>
+        <blockquote>
+          "I kept a clinical journal throughout nursing school — just little notes about things I did, experiences that stood out. When it came to preparing for the interview, I built out all of those experiences and told the whole story. Then I organized them thematically. Here are all my answers about teamwork. Here are all my answers about advocacy. And I picked the top two of each category — because no matter what, those answers should apply to the questions I'm being asked."
+          <cite>— Corey</cite>
+        </blockquote>
+        <blockquote>
+          "I also arranged them into themes and picked my strongest, but always had a backup just in case. And I'd pick stories that could also fit something else — so if I already used my strongest for one question, I had another story to tell and I wasn't repeating myself."
+          <cite>— Angie</cite>
+        </blockquote>
+        <p>Laticia's response: <em>"Your nursing instructors were actually preparing you. They weren't just making you do busy work."</em></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>From the Q&amp;A — Corey and Angie</h2>
+
+      <div class="wn-section">
+        <h3>On making your application stronger (Corey, who reapplied)</h3>
+        <blockquote>
+          "With my first round of essays, I came from an emotional place — and people gave me feedback like 'this is great but you don't sound confident.' When I rewrote them, I went for it in a way that felt more authentic to myself and my feelings going through clinicals. And I was selected."
+          <cite>— Corey</cite>
+        </blockquote>
+      </div>
+
+      <div class="wn-section">
+        <h3>On being in the room with other impressive candidates</h3>
+        <blockquote>
+          "Be prepared that everyone in there is going to be impressive. But that doesn't take anything away from you. Don't change your answer after hearing someone else's. You know the story — stick with it. Trying to one-up someone in the moment just doesn't go well."
+          <cite>— Angie</cite>
+        </blockquote>
+      </div>
+
+      <div class="wn-section">
+        <h3>On sounding generic</h3>
+        <p>Laticia's response to a candidate who worried about giving standard answers: <em>"Even if it's a 'generic' story — start asking yourself, why am I thinking of this one? Why do I want to share this? How has it affected me now? Really dig into that. That's where your secret sauce is, even in a generic story."</em></p>
+      </div>
+
+      <div class="wn-section">
+        <h3>On the unit-level interview</h3>
+        <blockquote>
+          "My in-person interview felt less stressful than the Zoom interview. It felt like more of a conversation — more of a vibe check. I just felt more comfortable and was able to be myself. I didn't have to stick to a two-minute script."
+          <cite>— Corey</cite>
+        </blockquote>
+        <blockquote>
+          "Everyone just put my mind at ease. We were laughing and talking. Compared to the panel, it was very informal. You get to feel out their vibe — and they get to feel out yours."
+          <cite>— Angie</cite>
+        </blockquote>
+        <p>Angie's manager told her beforehand that some questions might be repeated and it was okay to repeat her story. It varies by unit — manager's discretion.</p>
+      </div>
+
+      <div class="wn-section">
+        <h3>On what one thing helped most in preparation</h3>
+        <blockquote>
+          "I rewatched the webinar and took notes the second time. I used the STAR method for my answers — it really changed things. I felt more confident because I felt like I was hitting all the points."
+          <cite>— Angie</cite>
+        </blockquote>
+        <blockquote>
+          "Make yourself the star of the show. They know you're not caring for patients by yourself in clinicals — they know your preceptor is there. But really talk about what your thought process was and the steps you took. Rather than 'my preceptor did this,' make yourself the center."
+          <cite>— Corey</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .page -->
+
+<script>
+// Tab switching
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// Countdown
+const target = new Date('2026-07-28T15:00:00-07:00');
+function tick() {
+  const diff = target - new Date();
+  if (diff <= 0) { document.getElementById('countdown').textContent = '🎉 Interview time!'; return; }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('countdown').textContent = `${d}d ${h}h ${m}m ${s}s`;
+}
+tick(); setInterval(tick, 1000);
+
+// Intro draft
+const introEl = document.getElementById('intro-text');
+const defaultIntro = `Hi, my name is Julianne Millare — Juli. I graduated from Samuel Merritt University's ABSN program in May 2025, Summa Cum Laude. Before nursing school I completed a BA in Psychology with a Neuroscience minor at USF, and that background is part of what drew me to this Medicine panel — the intersection of brain, body, and critical illness is where I want to spend my career.
+
+My senior preceptorship was at CPMC Davies in the ICU and TICU, caring for patients with respiratory failure, sepsis, trauma, and stroke. Ventilator management, high-alert medications, rapid response situations — that environment is where I found my clinical footing, and it's the kind of pace I feel most present in.
+
+But what shaped me before that matters just as much. I grew up in a family-operated care home and spent four years as a caregiver for residents with Alzheimer's, Parkinson's, and psychiatric conditions. I saw early how much small, consistent acts of care could make a meaningful difference — not just clinically, but in the way a person feels seen and not alone.
+
+Outside the hospital, I worked as a case manager connecting people to housing and healthcare, and as a behavioral health technician supporting children with autism. Both roles pushed me to slow down, listen more carefully, and think about what support actually looks like for each individual person. That habit has followed me into every clinical rotation since.
+
+I also completed an academic exchange in Japan focused on cross-cultural communication in healthcare. I'm a member of Sigma Theta Tau and the AACN, and I served as a peer tutor at Samuel Merritt.
+
+What draws me to Stanford is the sense that clinical excellence and genuine human connection are treated as equally important — and that balance is what I try to bring to my practice.
+
+In my first year, I hope to [FILL IN — be specific about what you want to grow in and why].`;
+introEl.value = localStorage.getItem('juli_intro') ?? defaultIntro;
+function updateWordCount() {
+  const words = introEl.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+  if (!words) { document.getElementById('intro-wc').textContent = ''; return; }
+  const secs = Math.round(words / 130 * 60);
+  const m = Math.floor(secs / 60), s = secs % 60;
+  const pace = secs <= 120 ? '✓ under 2 min' : secs <= 150 ? 'slightly over — trim a little' : 'over — needs trimming';
+  document.getElementById('intro-wc').textContent = `${words} words · ~${m}:${s.toString().padStart(2,'0')} at speaking pace · ${pace}`;
+}
+updateWordCount();
+let introSaveT;
+introEl.addEventListener('input', () => {
+  updateWordCount();
+  clearTimeout(introSaveT);
+  introSaveT = setTimeout(() => localStorage.setItem('juli_intro', introEl.value), 600);
+});
+
+// Intro timer
+let iSecs = 120, iInterval = null, iPaused = true;
+function renderIT() {
+  const m = Math.floor(iSecs / 60), s = iSecs % 60;
+  document.getElementById('intro-timer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  const f = document.getElementById('intro-fill');
+  f.style.width = (iSecs / 120 * 100) + '%';
+  f.style.background = iSecs <= 20 ? '#C4464E' : iSecs <= 40 ? '#E6AC3A' : '#C4746E';
+}
+function startIntroTimer() {
+  if (!iPaused) return; iPaused = false;
+  iInterval = setInterval(() => { if (iSecs <= 0) { clearInterval(iInterval); iPaused = true; return; } iSecs--; renderIT(); }, 1000);
+}
+function pauseIntroTimer() { iPaused = true; clearInterval(iInterval); }
+function resetIntroTimer() { pauseIntroTimer(); iSecs = 120; renderIT(); }
+renderIT();
+
+// Practice questions
+const builtInQs = [
+  "Tell me about a time during your clinical rotation when you provided compassionate care to a patient or family. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you recognized a safety concern and needed to escalate it. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you had to manage multiple priorities at once. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you experienced a challenge communicating with a clinical colleague. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you needed to provide service recovery to a patient or family member who was upset. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you advocated for a patient. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you worked on a high-functioning team. What was your role and contribution?",
+  "Tell me about a time during your clinical rotation when you had to reprioritize because a patient's condition changed unexpectedly. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you cared for a patient or family from a different background from your own. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you delegated a task or asked for help. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you made an error in judgment or caught a near-miss. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you educated a patient or family who was overwhelmed or anxious. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when you felt uncertain and had to seek guidance or use your resources. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time during your clinical rotation when a patient's family was distressed or upset. What happened, what actions did you take, and what was the outcome?",
+  "Tell me about a time when you received difficult feedback. How did you respond, and how has it shaped your practice?",
+  "Tell me about yourself and what you hope to accomplish in your first year as a registered nurse."
+];
+function allQuestions() {
+  const custom = JSON.parse(localStorage.getItem('juli_flashcards') || '[]');
+  return [...builtInQs, ...custom.map(c => c.q)];
+}
+let sessionCount = 0;
+function loadQuestion(q) {
+  document.getElementById('question-display').textContent = q;
+  resetPracticeTimer();
+  sessionCount++;
+  document.getElementById('session-counter').textContent =
+    `${sessionCount} question${sessionCount !== 1 ? 's' : ''} practiced this session`;
+  document.getElementById('question-display').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function loadCustomQuestion(i) {
+  const cards = JSON.parse(localStorage.getItem('juli_flashcards') || '[]');
+  if (cards[i]) loadQuestion(cards[i].q);
+}
+function drawQuestion() {
+  const pool = allQuestions();
+  loadQuestion(pool[Math.floor(Math.random() * pool.length)]);
+}
+const THEMES = [
+  { label: 'Introduction', indices: [15] },
+  { label: 'Compassionate Care', indices: [0] },
+  { label: 'Safety & Escalation', indices: [1] },
+  { label: 'Multiple Priorities', indices: [2, 7] },
+  { label: 'Communication & Education', indices: [3, 11] },
+  { label: 'Advocacy', indices: [5] },
+  { label: 'Teamwork', indices: [6] },
+  { label: 'Service Recovery', indices: [4, 13] },
+  { label: 'Cultural Humility', indices: [8] },
+  { label: 'Delegation & Resources', indices: [9, 12] },
+  { label: 'Error & Learning', indices: [10] },
+  { label: 'Feedback & Growth', indices: [14] },
+];
+function renderQuestionBank() {
+  const builtinEl = document.getElementById('qb-builtin');
+  if (!builtinEl) return;
+  builtinEl.innerHTML = THEMES.map(group => `
+    <div style="margin-bottom:0.2rem;">
+      <div style="font-size:0.72rem; font-weight:600; color:#9B8E8A; text-transform:uppercase; letter-spacing:0.06em; padding:0.55rem 0 0.15rem; border-top:1px solid #F0EBE8;">${group.label}</div>
+      ${group.indices.map(i => `<div class="qb-item">
+        <span class="qb-q">${builtInQs[i]}</span>
+        <button class="btn btn-outline-rose qb-load" onclick="loadQuestion(builtInQs[${i}])">Load →</button>
+      </div>`).join('')}
+    </div>`).join('');
+  const custom = JSON.parse(localStorage.getItem('juli_flashcards') || '[]');
+  const customEl = document.getElementById('qb-custom');
+  if (!customEl) return;
+  if (!custom.length) {
+    customEl.innerHTML = '<p style="color:#9B8E8A; font-size:0.85rem; margin:0.4rem 0 0;">No custom cards yet — add some above.</p>';
+    return;
+  }
+  customEl.innerHTML = custom.map((c, i) => `
+    <div class="qb-item">
+      <div style="flex:1;">
+        <div class="qb-q">${c.q}</div>
+        ${c.notes ? `<div style="font-size:0.8rem; color:#9B8E8A; margin-top:0.2rem;">${c.notes}</div>` : ''}
+      </div>
+      <div style="display:flex; gap:0.4rem; flex-shrink:0;">
+        <button class="btn btn-outline-rose qb-load" onclick="loadCustomQuestion(${i})">Load →</button>
+        <button class="btn btn-outline-rose qb-load" style="color:#9B8E8A; border-color:#D8CFC8;" onclick="deleteFlashcard(${i})">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+// Practice timer
+let pSecs = 120, pInterval = null, pPaused = true;
+function renderPT() {
+  const m = Math.floor(pSecs / 60), s = pSecs % 60;
+  document.getElementById('practice-timer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  const f = document.getElementById('practice-fill');
+  f.style.width = (pSecs / 120 * 100) + '%';
+  f.style.background = pSecs <= 20 ? '#C4464E' : pSecs <= 40 ? '#E6AC3A' : '#7A9E7E';
+}
+function startPracticeTimer() {
+  if (!pPaused) return; pPaused = false;
+  pInterval = setInterval(() => { if (pSecs <= 0) { clearInterval(pInterval); pPaused = true; return; } pSecs--; renderPT(); }, 1000);
+}
+function pausePracticeTimer() { pPaused = true; clearInterval(pInterval); }
+function resetPracticeTimer() { pausePracticeTimer(); pSecs = 120; renderPT(); }
+renderPT();
+
+// Answer builder
+['ab-top','ab-ice','ab-bot'].forEach(id => {
+  const el = document.getElementById(id);
+  el.value = localStorage.getItem('juli_' + id) || '';
+  let t;
+  el.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => localStorage.setItem('juli_' + id, el.value), 600); });
+});
+function clearAnswerBuilder() {
+  if (!confirm('Clear the answer builder?')) return;
+  ['ab-top','ab-ice','ab-bot'].forEach(id => { document.getElementById(id).value = ''; localStorage.removeItem('juli_' + id); });
+}
+
+// Flashcards
+function loadFlashcards() {
+  const cards = JSON.parse(localStorage.getItem('juli_flashcards') || '[]');
+  const list = document.getElementById('fc-list');
+  if (!cards.length) {
+    list.innerHTML = '<p style="color:#8B7E7A; font-size:0.88rem;">No custom cards yet.</p>';
+  } else {
+    list.innerHTML = cards.map((c, i) => `
+      <div style="background:#FAF7F2; border:1px solid #E8E0D8; border-radius:6px; padding:0.85rem; margin:0.5rem 0;">
+        <p style="margin:0 0 0.35rem; font-style:italic; font-size:0.93rem;">${c.q}</p>
+        ${c.notes ? `<p style="margin:0 0 0.5rem; font-size:0.82rem; color:#8B7E7A;">${c.notes}</p>` : ''}
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+          <button class="btn btn-outline-rose" style="font-size:0.8rem; padding:0.3rem 0.7rem;" onclick="loadCustomQuestion(${i})">Load →</button>
+          <button class="btn btn-outline-rose" style="font-size:0.8rem; padding:0.3rem 0.7rem; color:#9B8E8A; border-color:#D8CFC8;" onclick="deleteFlashcard(${i})">Remove</button>
+        </div>
+      </div>`).join('');
+  }
+  renderQuestionBank();
+}
+function addFlashcard() {
+  const q = document.getElementById('fc-question').value.trim();
+  const notes = document.getElementById('fc-notes').value.trim();
+  if (!q) return;
+  const cards = JSON.parse(localStorage.getItem('juli_flashcards') || '[]');
+  cards.push({ q, notes });
+  localStorage.setItem('juli_flashcards', JSON.stringify(cards));
+  document.getElementById('fc-question').value = '';
+  document.getElementById('fc-notes').value = '';
+  loadFlashcards();
+}
+function deleteFlashcard(i) {
+  const cards = JSON.parse(localStorage.getItem('juli_flashcards') || '[]');
+  cards.splice(i, 1);
+  localStorage.setItem('juli_flashcards', JSON.stringify(cards));
+  loadFlashcards();
+}
+loadFlashcards();
+
+// Notes
+const notesEl = document.getElementById('notes-text');
+notesEl.value = localStorage.getItem('juli_notes') || '';
+let nT;
+notesEl.addEventListener('input', () => { clearTimeout(nT); nT = setTimeout(() => localStorage.setItem('juli_notes', notesEl.value), 600); });
+
+// Story bank accordion
+function toggleSB(i) {
+  const card = document.getElementById('sbc-' + i);
+  card.classList.toggle('open');
+}
+function saveStoryNote(i) {
+  const val = document.getElementById('sbn-' + i).value;
+  localStorage.setItem('juli_sbn_' + i, val);
+  const saved = document.getElementById('sbsaved-' + i);
+  saved.classList.add('show');
+  setTimeout(() => saved.classList.remove('show'), 1800);
+}
+function loadStoryNotes() {
+  for (let i = 0; i < 11; i++) {
+    const saved = localStorage.getItem('juli_sbn_' + i);
+    if (saved) document.getElementById('sbn-' + i).value = saved;
+  }
+}
+loadStoryNotes();
+
+// Day-of checklist
+const dayIds = ['nb1','nb2','nb3','nb4','nb5','d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11'];
+function saveChecks() {
+  const s = {};
+  dayIds.forEach(id => { s[id] = document.getElementById(id).checked; });
+  localStorage.setItem('juli_checks', JSON.stringify(s));
+}
+function loadChecks() {
+  const raw = localStorage.getItem('juli_checks');
+  if (!raw) return;
+  const s = JSON.parse(raw);
+  dayIds.forEach(id => { if (s[id]) document.getElementById(id).checked = true; });
+}
+dayIds.forEach(id => document.getElementById(id).addEventListener('change', saveChecks));
+loadChecks();
+</script>
+</body>
+</html>
