@@ -175,18 +175,39 @@
   .sb-textarea:focus { outline: none; border-color: #C4746E; }
   .sb-saved { font-size: 0.72rem; color: #7A9E7E; font-family: sans-serif; margin-top: 0.2rem; opacity: 0; transition: opacity 0.3s; }
   .sb-saved.show { opacity: 1; }
-  .sb-answer-label {
-    font-size: 0.74rem; font-family: 'Inter', system-ui, sans-serif;
-    color: #9B8E8A; margin: 1rem 0 0.3rem; text-transform: uppercase; letter-spacing: 0.05em;
+  .sb-answer-toggle {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    background: none; border: 1px solid #D8CFC8; border-radius: 20px;
+    padding: 0.38rem 0.9rem; cursor: pointer;
+    font-family: 'Inter', system-ui, sans-serif; font-size: 0.78rem;
+    color: #9B8E8A; transition: all 0.15s; margin: 0.75rem 0 0.25rem;
   }
-  .sb-answer-meta { font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.72rem; color: #B0A8A4; }
+  .sb-answer-toggle:hover, .sb-answer-toggle.open { background: #FFF8F6; color: #C4746E; border-color: #C4746E; }
+  .sb-answer-wrap { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .sb-answer-wrap.open { max-height: 1600px; }
+  .sb-answer-toolbar { display: flex; align-items: center; justify-content: space-between; margin: 0.5rem 0 0.3rem; }
+  .sb-answer-hint { font-size: 0.72rem; color: #B0A8A4; font-family: 'Inter', system-ui, sans-serif; }
+  .sb-edit-btn {
+    font-size: 0.72rem; background: none; border: 1px solid #D8CFC8;
+    border-radius: 12px; padding: 0.2rem 0.6rem; color: #9B8E8A;
+    cursor: pointer; font-family: 'Inter', system-ui, sans-serif; transition: all 0.15s;
+  }
+  .sb-edit-btn:hover { border-color: #C4746E; color: #C4746E; }
   .sb-answer {
     background: #FFF8F6; border: 1px solid #EDE8E3; border-left: 3px solid #C4746E;
     border-radius: 0 8px 8px 0; padding: 1rem 1.1rem; font-family: 'Lora', Georgia, serif;
-    font-size: 0.88rem; line-height: 1.85; color: #3A3330; font-style: italic;
+    font-size: 0.88rem; line-height: 1.85; color: #3A3330; font-style: italic; margin-bottom: 0.5rem;
   }
   .sb-answer p { margin: 0 0 0.8rem; }
   .sb-answer p:last-child { margin-bottom: 0; }
+  .sa-textarea {
+    display: none; width: 100%; padding: 0.85rem;
+    border: 1px solid #C4746E; border-radius: 6px;
+    font-family: 'Lora', Georgia, serif; font-size: 0.88rem;
+    color: #3A3330; background: #FFF8F6; resize: vertical;
+    line-height: 1.85; font-style: italic; min-height: 200px; margin-bottom: 0.5rem;
+  }
+  .sa-textarea:focus { outline: none; }
 
   /* Webinar notes */
   .wn-section { border-left: 3px solid #F0D4D2; padding-left: 1rem; margin: 1.25rem 0; }
@@ -534,14 +555,21 @@
           </ul>
           <div class="sb-note sb-note-gold">This is your most flexible story. Compassionate care, cultural humility, advocacy, clinical judgment, "what nursing means to you" — it stretches to fit all of them. Know it until it sounds like a conversation, not a script.</div>
           <div class="sb-note sb-note-rose" style="margin-top:0.75rem;">Bonus story — "above and beyond": ICU stroke patient at CPMC Davies who couldn't speak or move. You learned from her daughter that she loved Motown. You played it softly in the room while caring for her. When the daughter returned, she said it gave her peace of mind knowing her mom had something familiar. Works for compassionate care, going above and beyond, or "what does nursing mean to you." One sentence payoff: "She told me it gave her peace of mind knowing her mother had something familiar and meaningful with her while she was away."</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-0" onclick="toggleAnswer(0)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-0">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-0" onclick="toggleAnswerEdit(0)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-0">
             <p>During my senior preceptorship at CPMC Davies, I cared for a post-extubation patient who was terrified the moment I walked in. She was pulling at her lines, fighting her oxygen tubing, eyes scanning the room. Monitors alarming. Unit busy. Nobody had stopped.</p>
             <p>What I noticed first was that this wasn't confusion — she wasn't disoriented. She was scared, alone, and no one had made a human connection with her yet.</p>
             <p>So I stopped. I walked over, lowered myself to her level, and held her hand. I spoke quietly — in Tagalog. "Okay lang... nandito ako." You're okay. I'm here.</p>
             <p>I kept my voice calm and just stayed with her. Didn't try to explain the alarms or rush her through the fear. Just stayed present until I felt her grip slowly soften. Her breathing slowed. She stopped fighting the tubing. She turned her face toward me and focused on my voice instead of the chaos around her.</p>
             <p>No medication changed. No intervention performed. What changed is that she knew someone was with her.</p>
             <p>That moment is the clearest example I have of malasakit — a Filipino word for genuine, deep care. It's not a technique you apply. It's a way of being present, especially on the busiest shifts, when stopping feels like the last thing you have time for. That's exactly when it matters most. It's why I became a nurse.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-0" oninput="saveAnswer(0)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-0" placeholder="Add your own notes or reminders…" oninput="saveStoryNote(0)"></textarea>
@@ -565,13 +593,20 @@
             <li>Team activated Rapid Response — patient was transferred to the ICU for a higher level of care</li>
           </ul>
           <div class="sb-note sb-note-gold">The power of this story is what YOU noticed before you saw the number. He was supposed to go home. Lead with the clinical gut feeling — something felt different — before naming the O₂ sat. That instinct is what makes this story yours, not just a checklist of interventions.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-1" onclick="toggleAnswer(1)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-1">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-1" onclick="toggleAnswerEdit(1)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-1">
             <p>During my med-surg rotation, I was caring for a patient with sickle cell disease who was scheduled to discharge that day. Everyone expected him to be on his way home — it was a busy morning, and his earlier assessment had looked fine. But when I walked into his room, something felt wrong. I couldn't name it yet. I just felt it.</p>
             <p>He was curled in fetal position. The call light was on the floor. His oxygen saturation read 72%.</p>
             <p>I moved immediately. I elevated the head of his bed, confirmed his oxygen delivery, and got my nurse. I gave her a clear SBAR: chest pain, persistent shortness of breath, O₂ not stabilizing despite supplemental oxygen. Together we recognized this was beyond what I could safely manage as a student, and the team activated a Rapid Response. He was transferred to the ICU.</p>
             <p>What I kept coming back to afterward was that he was supposed to go home that day. That expectation of improvement had made the change in his condition easy to miss — for everyone. That's what made it dangerous.</p>
             <p>What I learned is that your obligation to keep assessing doesn't ease up when a patient seems to be doing well. If anything, stay more alert. I trust that instinct now. When something feels off, I stop, I look, and I speak up. That's the job.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-1" oninput="saveAnswer(1)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-1" placeholder="Which patient? What did you notice first?" oninput="saveStoryNote(1)"></textarea>
@@ -596,14 +631,21 @@
             <li>Administered insulin safely under supervision; checked in on Patient B afterward to confirm she'd been cared for</li>
           </ul>
           <div class="sb-note sb-note-gold">Walk through the WHY, not just the what. Why insulin first? Because timing is tied directly to her meal and medication safety. Communicating the plan to both patients before doing anything is the detail that separates clinical judgment from task management.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-2" onclick="toggleAnswer(2)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-2">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-2" onclick="toggleAnswerEdit(2)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-2">
             <p>During one of my med-surg rotations, I had two patients with competing needs at the same time and had to figure out in real time how to care for both of them well.</p>
             <p>My first patient needed blood glucose checked and insulin administered before breakfast — time-sensitive, requires clinical judgment, mine to do. My second patient had a morning hygiene routine she did every day before her meal. It genuinely mattered to her sense of normalcy. Honestly, I get that — those small rituals are one of the few things you still control when you're in the hospital.</p>
             <p>Before I did anything, I communicated the plan. I went to both rooms and told each patient what was happening and why, so neither was just left waiting. Then I found the UAP and gave her the actual specifics — not just "help her freshen up," but the exact details my patient had shared about how she liked her routine done.</p>
             <p>Then I focused on the insulin. Blood glucose, medication, done safely under supervision. Circled back to both patients to check in.</p>
             <p>Both told me they felt taken care of — not just medically, but as people.</p>
             <p>That's really what good prioritization looks like to me. Getting the urgent thing done matters. But so does making sure everyone still feels seen while you're doing it.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-2" oninput="saveAnswer(2)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-2" placeholder="Which rotation? What were the two competing priorities?" oninput="saveStoryNote(2)"></textarea>
@@ -627,13 +669,20 @@
             <li>When the situation stabilized, I was able to loop her back in — she wasn't left waiting alone with no information</li>
           </ul>
           <div class="sb-note sb-note-gold">Your preceptor was there — that's expected. The story is about you asking for a role, claiming it, and doing it well. Keeping that family member grounded took real emotional presence, and it freed the clinical team to focus. That's a team contribution. Name it as one.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-3" onclick="toggleAnswer(3)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-3">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-3" onclick="toggleAnswerEdit(3)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-3">
             <p>During my preceptorship at CPMC Davies, a rapid response was called on my floor. The hallway filled fast — nurses and physicians moving with clear purpose, everyone already in their role. I knew immediately I needed to be useful without getting in the way.</p>
             <p>I found my preceptor and asked directly: "How can I help?" She pointed me to the patient's family member, who was pressed against the wall just outside the room, hands at her mouth, trying to see past the door.</p>
             <p>I walked toward her, introduced myself calmly, and guided her a little ways down the hall. I sat with her. I didn't try to minimize how scared she was or explain everything away — I just made sure she wasn't standing there alone with no one to turn to. I told her I'd stay and update her as best I could while the team worked. And I did.</p>
             <p>When things stabilized, I brought her back in. She gripped my hand and told me that having someone sitting beside her had made the waiting bearable — that she'd been afraid no one would tell her anything.</p>
             <p>That stayed with me. A high-functioning team doesn't just respond to what's happening in the room — it also holds the people standing outside it. I was given a specific role that shift, and I took it seriously. That's what it means to be on a team.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-3" oninput="saveAnswer(3)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-3" placeholder="What was your specific role in the team response?" oninput="saveStoryNote(3)"></textarea>
@@ -657,14 +706,21 @@
             <li>Over time, she became more cooperative and care became far less distressing — for her and for the team</li>
           </ul>
           <div class="sb-note sb-note-rose">Advocacy doesn't always mean speaking up to a physician. Here it means protecting her dignity by adapting instead of forcing compliance. The piece where you shared your observations with the team is the bottom cookie — you made her experience better even on the shifts when you weren't there.<br><br>If the question specifies "clinical rotation," shift to the Community Health rotation (First Presbyterian Homeless Shelter): connecting an uninsured patient to Medi-Cal enrollment and local free clinics is a clean advocacy story within your clinical scope.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-4" onclick="toggleAnswer(4)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-4">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-4" onclick="toggleAnswerEdit(4)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-4">
             <p>When I worked as a caregiver at my family's care home, one of our residents had dementia and would regularly become agitated during care — pulling away, crying, raising her voice. The standard approach of moving efficiently and getting through tasks was making things worse.</p>
             <p>So I changed my approach completely.</p>
             <p>I started slowing everything down. Quieter tone, more deliberate pace. I offered small choices — which arm first, which washcloth she preferred, whether she wanted the window open. Not because they changed the care itself, but because they gave her some sense of control over what was happening to her. And I started really paying attention: what triggered her, what settled her. Noise made things worse. Consistency made things better. Feeling rushed was the surest predictor of resistance.</p>
             <p>Over time, the agitation eased. She allowed care. One morning she reached out and patted my hand when I came in. That small gesture stayed with me.</p>
             <p>But the part I was most proud of wasn't the progress between just the two of us. It was making sure it continued when I wasn't there. I documented what worked and shared it with the whole team, so her care stayed consistent across every shift — not just mine.</p>
             <p>That's what advocacy means to me. Sometimes it's not one big act — it's protecting someone's dignity, interaction by interaction, and making sure it keeps happening even when you've gone home.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-4" oninput="saveAnswer(4)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-4" placeholder="What did the patient need that wasn't being addressed?" oninput="saveStoryNote(4)"></textarea>
@@ -688,13 +744,20 @@
           </ul>
           <div class="sb-note sb-note-gold">The Japan exchange was a formal academic program focused on cross-cultural nursing and global healthcare — name it as that, not just "a study abroad." Combined with your Filipino background and malasakit, you have two strong examples for this theme and a personal identity that connects directly to clinical practice.</div>
           <div class="sb-note sb-note-rose" style="margin-top:0.75rem;">From Erika's guide (your friend who got into Stanford): she opened her introduction by naming her immigrant background as her reason for caring about inclusion in patient care. You can do the same — your Filipino heritage and malasakit philosophy aren't just personal details. They're your clinical foundation, and Stanford's Caring Science model aligns with exactly that.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-5" onclick="toggleAnswer(5)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-5">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-5" onclick="toggleAnswerEdit(5)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-5">
             <p>My understanding of cultural humility is personal before it's clinical. I grew up in a Filipino family where malasakit — a genuine, deep care for others — shaped how I understood what it meant to show up for people long before I ever touched a clinical setting.</p>
             <p>In nursing school, I did an academic exchange in Hamamatsu, Japan, focused on cross-cultural communication in healthcare. I was caring for patients whose language, customs, and expectations around care were completely different from mine. I made assumptions — well-meaning ones — and I watched them create distance when I intended connection.</p>
             <p>What I brought back is a practice I use now in every rotation: ask before assuming. How does this patient want to be communicated with? Who do they want in the room? What does feeling cared for mean to them — not in general, but right now?</p>
             <p>The clearest example from my clinical work is caring for a post-extubation patient at CPMC Davies who was terrified and alone. The intervention that mattered most was speaking Tagalog to her. That wasn't just a personal detail — it was a clinical tool.</p>
             <p>Cultural humility isn't about knowing every culture. It's about staying curious — seeing each patient as someone with a specific background and a specific way of needing care, not just a diagnosis. I want to practice somewhere that value is lived, not just listed. From what I know about Stanford's nursing culture, I believe it is.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-5" oninput="saveAnswer(5)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-5" placeholder="Japan exchange, malasakit story, HCEB — which fits the question best?" oninput="saveStoryNote(5)"></textarea>
@@ -719,8 +782,13 @@
           </ul>
           <div class="sb-note sb-note-gold">Lead with "I made an error in judgment" — don't soften it. The strength of this story is in what you did immediately after and what you carry forward. "Patient safety always comes before speed" is your bottom cookie. Accountability without defensiveness is what they're looking for.</div>
           <div class="sb-note sb-note-rose" style="margin-top:0.75rem;">Backup story (open-ended questions only — not "during your clinical rotation"): BHT / Connect Four with 7-year-old autistic patient from Essay 2. Noticed early signs of overwhelm but kept prompting → session escalated → removed demands, shifted to bubbles, rebuilt at his pace. Strong reflection on reading behavioral cues — translates directly to nursing judgment. Flag as non-clinical if using it.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-6" onclick="toggleAnswer(6)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-6">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-6" onclick="toggleAnswerEdit(6)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-6">
             <p>During one of my med-surg rotations, I made an error I carry with me.</p>
             <p>My preceptor and I were behind on medications during a busy shift. When we entered a patient's room for a time-sensitive IV medication, I administered it before scanning the patient's ID band.</p>
             <p>I caught it immediately. I stopped, went back, and checked everything — ID, medication, dose, route. Correct patient. Correct medication. No harm. But I had skipped a step that exists for exactly those moments — when you feel certain and you're already running behind.</p>
@@ -728,6 +796,8 @@
             <p>Sitting with it afterward, I realized the pace of the shift had overridden my process. I had told myself I knew who the patient was, that we were behind, that it would be fine — and every one of those thoughts is how errors start. The certainty is the problem.</p>
             <p>Since then, I pause before every medication, regardless of how rushed things are. Not out of fear — because I genuinely understand now what that scan is for.</p>
             <p>What I carry isn't just the rule. It's the understanding behind it. Patient safety comes before speed. Accountability means speaking up immediately and then actually changing your practice — not one or the other. Both.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-6" oninput="saveAnswer(6)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-6" placeholder="What safety step did you miss? What did you do immediately after?" oninput="saveStoryNote(6)"></textarea>
@@ -753,8 +823,13 @@
             <li>His whole demeanor shifted. He thanked us. "He told me he no longer saw it as punishment, but as something that would help him heal."</li>
           </ul>
           <div class="sb-note sb-note-gold">The information gap — nobody had explained it to him — is the real ice cream. His anger wasn't the problem; the gap was. Identifying that and filling it is clinical judgment, not just de-escalation. The humanizing line ("I'd probably feel the same way") works because it's true.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-7" onclick="toggleAnswer(7)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-7">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-7" onclick="toggleAnswerEdit(7)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-7">
             <p>During my med-surg rotation, I cared for a patient who was NPO due to an intestinal obstruction. He hadn't eaten in over 24 hours. When I came in to check vitals, he raised his voice immediately — said the staff was mistreating him, deliberately starving him.</p>
             <p>Honestly? I understood. I probably would've felt the same way.</p>
             <p>Before I said anything, I let him finish. No interrupting, no defending while he was still in the middle of it. When he was done, I told him I heard him — that going 24 hours without food is genuinely miserable, and his frustration made complete sense. Then I asked a question that changed the whole conversation: "Has anyone explained to you why the NPO order is in place?"</p>
@@ -763,6 +838,8 @@
             <p>I brought my nurse in, and together we sat with him and explained it clearly — not just the medical reason, but what was actually happening in his body and why eating could make things worse. We reframed it: this wasn't the staff withholding something from him. This was the staff protecting him.</p>
             <p>His whole demeanor shifted. Shoulders dropped, voice quieted. He thanked us and told me he no longer saw it as punishment — that now that he understood, he felt like we were actually on his side.</p>
             <p>De-escalation starts with listening. But the real clinical work is figuring out what's actually wrong beneath the anger.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-7" oninput="saveAnswer(7)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-7" placeholder="Which patient or family situation comes to mind?" oninput="saveStoryNote(7)"></textarea>
@@ -786,14 +863,21 @@
             <li>She opened up. By the end of the shift, she walked me through the IV pump and medications. She thanked me and shared she'd had a very difficult week — that's why she'd seemed distant.</li>
           </ul>
           <div class="sb-note sb-note-gold">The sequence is the story: observe → wait for the right moment → lead with empathy before asking for anything → demonstrate value through action. "I see you're busy" disarms. "Would it be okay if…" gives her control. That's not just people skills — that's how you build working relationships in a high-pressure environment.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-8" onclick="toggleAnswer(8)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-8">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-8" onclick="toggleAnswerEdit(8)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-8">
             <p>During my med-surg rotation, I was assigned to a nurse who seemed to be running on fumes from the moment I arrived — brief, clipped, clearly overwhelmed. I wanted to learn IV medication administration and infusion pump setup that shift, but I could tell she didn't have bandwidth. Asking for teaching in the first hour felt like the wrong move.</p>
             <p>My instinct was to hang back and wait. But I also knew: if I spent the whole shift waiting, neither of us would get anything out of it.</p>
             <p>I watched her workflow and waited for a natural pause. When there was one, I went to her directly: "I can see it's really busy. I don't want to add to that — would it be okay if I ask questions when I'm unsure, and in the meantime I'll help wherever I can."</p>
             <p>Then I followed through before asking for anything. Vital signs, blood glucose checks, gathering supplies, anticipating what she might need next. I tried to earn the time before I asked for it.</p>
             <p>By midday, she started pulling me in — explaining her reasoning, walking me through decisions. By the end of the shift, she went through the IV pump with me in full. On the way out, she told me she'd been working back-to-back difficult shifts. That's why she'd seemed closed off that morning. It had nothing to do with me.</p>
             <p>What I carry from that day: lead with empathy, demonstrate value first, and give people room to meet you. Most of the time, they will.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-8" oninput="saveAnswer(8)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-8" placeholder="A challenging handoff, a provider call that required persistence?" oninput="saveStoryNote(8)"></textarea>
@@ -817,14 +901,21 @@
             <li>Checked in afterward — confirmed both patients had received care and that the patient's preferences had been respected</li>
           </ul>
           <div class="sb-note sb-note-gold">Delegation is a clinical decision, not a shortcut. You didn't hand off because you were overwhelmed — you delegated because it was the right structure for safe, timely care. Checking in afterward closes the loop and shows you stayed accountable for your patient even after handing off the task.</div>
-          <div class="sb-answer-label">Sample Answer <span class="sb-answer-meta">— starting point, make it yours</span></div>
-          <div class="sb-answer">
+          <button class="sb-answer-toggle" id="sat-9" onclick="toggleAnswer(9)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-9">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-9" onclick="toggleAnswerEdit(9)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-9">
             <p>During one of my med-surg rotations, I had two patients with simultaneous needs and had to decide not just what to prioritize, but how to delegate in a way that both patients actually felt cared for.</p>
             <p>My first patient needed blood glucose checked and insulin administered before breakfast — time-sensitive, requires my clinical assessment, mine to do. My second patient had a morning hygiene routine she completed every day before her meal. It was meaningful to her. She'd told me exactly how she liked it done. Within the UAP's scope — but only if I communicated clearly enough.</p>
             <p>I went to both patients briefly to explain the plan so neither was left wondering. Then I found the UAP and gave her the actual details: not "help her freshen up," but the specific preferences my patient had shared — the things that made that routine feel right to her.</p>
             <p>Then I focused on the insulin. Blood glucose, medication, done safely under supervision. Circled back to both patients to check in.</p>
             <p>My second patient told me it had been done exactly the way she liked it. She seemed genuinely surprised — and grateful — that someone had passed that along.</p>
             <p>That's what I mean when I say delegation is a clinical decision. Not offloading — structuring care so that both patients get what they need, from the right person, at the right time. Checking in afterward is what keeps you accountable for their experience even when you weren't the one there.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-9" oninput="saveAnswer(9)"></textarea>
           </div>
           <div class="sb-notes-label">Your notes</div>
           <textarea class="sb-textarea" id="sbn-9" placeholder="A moment you recognized your limit and acted on it?" oninput="saveStoryNote(9)"></textarea>
@@ -1519,6 +1610,46 @@ function toggleSB(i) {
   const card = document.getElementById('sbc-' + i);
   card.classList.toggle('open');
 }
+function toggleAnswer(i) {
+  const wrap = document.getElementById('saw-' + i);
+  const btn = document.getElementById('sat-' + i);
+  const isOpen = wrap.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.innerHTML = isOpen ? '&#9663; Hide Sample Answer' : '&#9657; Reveal Sample Answer';
+}
+function toggleAnswerEdit(i) {
+  const div = document.getElementById('sa-' + i);
+  const ta = document.getElementById('sa-ta-' + i);
+  const btn = document.getElementById('saedit-' + i);
+  if (!ta.style.display || ta.style.display === 'none') {
+    if (!ta.value) {
+      ta.value = [...div.querySelectorAll('p')].map(p => p.textContent).join('\n\n');
+    }
+    ta.style.display = 'block';
+    div.style.display = 'none';
+    btn.innerHTML = '&#10003; Done';
+    ta.focus();
+  } else {
+    const text = ta.value.trim();
+    div.innerHTML = text.split(/\n\n+/).map(t => '<p>' + t.trim() + '</p>').join('');
+    ta.style.display = 'none';
+    div.style.display = '';
+    btn.innerHTML = '&#9998; Edit';
+  }
+}
+function saveAnswer(i) {
+  localStorage.setItem('juli_sa_' + i, document.getElementById('sa-ta-' + i).value);
+}
+(function restoreAnswerEdits() {
+  for (let i = 0; i <= 9; i++) {
+    const saved = localStorage.getItem('juli_sa_' + i);
+    if (!saved) continue;
+    const div = document.getElementById('sa-' + i);
+    const ta = document.getElementById('sa-ta-' + i);
+    if (div) div.innerHTML = saved.split(/\n\n+/).map(t => '<p>' + t.trim() + '</p>').join('');
+    if (ta) ta.value = saved;
+  }
+})();
 function saveStoryNote(i) {
   const val = document.getElementById('sbn-' + i).value;
   localStorage.setItem('juli_sbn_' + i, val);
