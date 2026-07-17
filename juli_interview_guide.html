@@ -77,6 +77,7 @@
   }
   .callout-rose { border-left-color: #C4746E; background: #FFF5F4; color: #5A2A28; }
   .callout-sage { border-left-color: #7A9E7E; background: #F3FAF4; color: #2A4A2E; }
+  .callout-gold { border-left-color: #E6AC3A; background: #FFFBF0; color: #4A3800; }
   .callout cite { display: block; font-size: 0.82rem; margin-top: 0.4rem; color: #8B7E7A; font-style: normal; }
 
   /* Pills */
@@ -353,6 +354,9 @@
         <li>Your <em>why</em> for medicine and neurology — connect your academic background here</li>
         <li>What you hope to accomplish in your first year — be genuine, be specific</li>
       </ul>
+      <div class="callout callout-gold" style="margin-top:1.1rem;">
+        <strong>How to close it:</strong> Don't end on "I'm really excited for this opportunity" — every candidate says that. End with one specific Stanford connection, something only you can say. Try: <em>"What drew me to Stanford specifically is…"</em> and name one real thing: the Caring Science alignment with malasakit, your med-surg foundation and General Medicine, your neuroscience minor and this panel. Pick the one that's truest, say it clearly, and stop. That's your landing.
+      </div>
     </div>
 
     <div class="card">
@@ -951,6 +955,42 @@
         </div>
       </div>
 
+      <!-- 12. Growth Area -->
+      <div class="sb-card" id="sbc-11">
+        <div class="sb-header" onclick="toggleSB(11)">
+          <span class="sb-theme">Growth Area <span class="sb-badge badge-lead" style="font-size:0.68rem;">Feedback Received</span></span>
+          <span class="sb-arrow">▾</span>
+        </div>
+        <div class="sb-body">
+          <div class="sb-source">Earlier clinical rotation · Instructor feedback on communicating with the healthcare team</div>
+          <ul class="sb-beats">
+            <li>Instructor gave direct feedback after a patient report: communicate more confidently with the team</li>
+            <li>Was second-guessing herself out loud, softening language ("I think maybe…", "I'm not sure, but…") even when she had correct information</li>
+            <li>Took the feedback seriously — started preparing structure before every handoff, pushed herself to speak up during rounds instead of waiting</li>
+            <li>By senior preceptorship at CPMC Davies: giving clear SBAR reports, escalating early, initiating communication rather than waiting to be asked</li>
+          </ul>
+          <div class="sb-note sb-note-gold">This is the answer to any version of "tell me about a weakness," "describe feedback you received," or "what's an area you've had to work on." The strength is that the feedback was valid — you weren't being unfairly criticized, you actually needed to work on something real. Name it directly: "I was second-guessing myself out loud." Interviewers respect that. The arc is what makes it land: specific feedback → specific action → visible result at CPMC Davies.</div>
+          <button class="sb-answer-toggle" id="sat-10" onclick="toggleAnswer(10)">&#9657; Reveal Sample Answer</button>
+          <div class="sb-answer-wrap" id="saw-10">
+            <div class="sb-answer-toolbar">
+              <span class="sb-answer-hint">starting point &#8212; edit to make it yours</span>
+              <button class="sb-edit-btn" id="saedit-10" onclick="toggleAnswerEdit(10)">&#9998; Edit</button>
+            </div>
+            <div class="sb-answer" id="sa-10">
+            <p>The feedback that shaped me most came from a clinical instructor during one of my earlier rotations. After a patient report, she pulled me aside and told me I needed to be more confident communicating with the healthcare team — that I was holding back, softening everything, even when I had the right information.</p>
+            <p>She was right. I had a habit of saying things like "I think maybe…" or "I'm not sure, but…" — phrases that undermined what I was actually trying to communicate. I knew what I wanted to say. I just didn't trust myself to say it directly.</p>
+            <p>I took that feedback seriously. I started preparing before every handoff — not scripting it, but organizing my thoughts so I knew exactly what I was going to lead with. I pushed myself to speak up during rounds, ask questions out loud, and stop holding back until after the moment had passed to say something I'd already thought of.</p>
+            <p>By my senior preceptorship at CPMC Davies, it looked different. I was giving clear SBAR reports, flagging changes in condition before I was asked, speaking up in the room instead of pulling someone aside afterward. My preceptor never had to prompt me to communicate — I initiated.</p>
+            <p>That feedback didn't just change how I report. It changed how I show up. And I'm genuinely grateful for it.</p>
+          </div>
+            <textarea class="sa-textarea" id="sa-ta-10" oninput="saveAnswer(10)"></textarea>
+          </div>
+          <div class="sb-notes-label">Your notes</div>
+          <textarea class="sb-textarea" id="sbn-11" placeholder="What other growth areas feel authentic to mention?" oninput="saveStoryNote(11)"></textarea>
+          <div class="sb-saved" id="sbsaved-11">Saved ✓</div>
+        </div>
+      </div>
+
     </div><!-- end .sb-grid -->
   </div>
 
@@ -1091,6 +1131,8 @@
       <div class="checklist-item"><input type="checkbox" id="d9"><label for="d9">Professional attire — dress as if it were in person</label></div>
       <div class="checklist-item"><input type="checkbox" id="d10"><label for="d10">Notebook and pen nearby — for memory jogs, not to read from</label></div>
       <div class="checklist-item"><input type="checkbox" id="d11"><label for="d11">Log in no earlier than 5 minutes before 3:00 PM</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d12"><label for="d12">Camera at eye level — stack books under your laptop if needed. Looking down at the panel reads as less confident than you are.</label></div>
+      <div class="checklist-item"><input type="checkbox" id="d13"><label for="d13">Phone face-down and silenced; computer notifications off (Slack, email, system alerts) before you log in</label></div>
 
       <div class="callout" style="margin-top:1.25rem;">
         Once you're in the waiting room — breathe. The facilitator will bring everyone in, introduce the hiring managers, and explain the format. You have a moment to settle before anything starts.
@@ -1102,12 +1144,14 @@
       <p>The hiring manager will call you. The in-person interview is a different energy — Corey described it as "more of a vibe check, a get-to-know-you, will you be a good fit." Angie said she was laughing and talking and asking them questions right back.</p>
       <p>You can repeat a story from Phase 1 if it comes up again — they understand. And here, unlike Phase 1, you get to ask questions.</p>
       <h3>Questions worth asking</h3>
+      <p style="font-size:0.86rem; color:#8B7E7A; margin: -0.25rem 0 0.75rem;">Pick 2–3. The best ones signal you've thought about the job, not just the interview. The last one takes confidence to ask — but it's powerful.</p>
       <ul>
-        <li>What makes a new grad resident successful on this unit?</li>
-        <li>What challenges do residents typically face in the first few months?</li>
-        <li>What do the current nurses say they love about working here?</li>
-        <li>What are the unit's goals right now?</li>
-        <li>What does support look like after orientation ends?</li>
+        <li>What qualities do you typically see in new grad residents who thrive on this unit — versus those who struggle in the first few months?</li>
+        <li>What does my first few weeks of orientation actually look like day-to-day? When do I start getting patient assignments?</li>
+        <li>How does the team here typically support new grads when things get intense — is there a real culture of asking for help?</li>
+        <li>What are the unit's current priorities or focus areas heading into the next year?</li>
+        <li>What does nursing leadership look like on this unit — is there a charge nurse culture, shared governance, how do staff nurses have a voice?</li>
+        <li><em>Is there anything about my background or experience you'd want me to speak to more?</em> — lets them surface a concern so you can address it before you leave.</li>
       </ul>
       <div class="callout">
         Send a thank-you email. When the manager calls to invite you, they'll follow up by email. Just reply to that thread after the interview — brief is fine.
@@ -1134,6 +1178,24 @@
       </div>
 
       <p>Stanford received its <strong>5th Magnet with Distinction redesignation in 2024</strong> — the highest level from the ANCC. The residency program itself holds ANCC accreditation with distinction, with the ANCC specifically noting the program's holistic approach to resident wellness. This is a hospital and a program that invests in nurses.</p>
+    </div>
+
+    <div class="card">
+      <h2>Why Stanford? Why This Program?</h2>
+      <p>This question is asked at almost every unit-level interview and sometimes slipped into the panel. The generic answer — "you have a great reputation" — wastes the question. The specific answer signals that you researched and that your fit is real, not aspirational.</p>
+      <div class="callout callout-rose" style="margin-bottom:1rem;">
+        You don't need to cite Jean Watson by name. But knowing that Watson's Caring Science is Stanford's nursing philosophy — and that it describes the same thing as malasakit — means you can say <em>Stanford's nursing model aligns with how I already practice</em> and mean it. That's the most credible thing you can say in an interview.
+      </div>
+
+      <h3>Sample Answer</h3>
+      <div class="sb-answer" style="margin:0 0 0.5rem;">
+        <p>There are a lot of strong residency programs in the Bay Area, but Stanford kept coming back to me for a specific reason.</p>
+        <p>Stanford's nursing model is built on Jean Watson's Caring Science — the idea that genuine human connection isn't a soft extra, it's a clinical act. I've been trying to describe that exact thing throughout nursing school. I just called it malasakit. When I read about Stanford's nursing culture, it didn't feel like something I'd have to learn to adopt. It felt like something I already believe.</p>
+        <p>The Magnet with Distinction redesignation also matters to me — not as a credential to name-drop, but because it signals institutional commitment to nurses. Programs that invest in their nurses build a culture you can feel. That's the environment I want to start my career in.</p>
+        <p>And for General Medicine specifically: my most formative clinical experiences were in med-surg. Three rotations at Sutter Mills-Peninsula, my preceptorship at CPMC Davies — that's where I built the foundation. High acuity, fast-moving, complex patients, strong team culture. I know that environment. I want to get really good inside it before I branch out.</p>
+        <p>I want to be somewhere that takes both the clinical rigor and the human side of nursing seriously. From everything I've read and heard about Stanford, you do both.</p>
+      </div>
+      <p style="font-size:0.82rem; color:#9B8E8A; font-family:'Inter',sans-serif; margin:0.25rem 0 0;">Adapt the last paragraph to the specific unit — swap in Neurology + your neuroscience minor if that's the interview.</p>
     </div>
 
     <div class="card">
@@ -1679,7 +1741,7 @@ function saveAnswer(i) {
   localStorage.setItem('juli_sa_' + i, document.getElementById('sa-ta-' + i).value);
 }
 function restoreAnswerEdits() {
-  for (let i = 0; i <= 9; i++) {
+  for (let i = 0; i <= 10; i++) {
     const saved = localStorage.getItem('juli_sa_' + i);
     if (!saved) continue;
     const div = document.getElementById('sa-' + i);
@@ -1697,7 +1759,7 @@ function saveStoryNote(i) {
   setTimeout(() => saved.classList.remove('show'), 1800);
 }
 function loadStoryNotes() {
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < 12; i++) {
     const saved = localStorage.getItem('juli_sbn_' + i);
     if (saved) document.getElementById('sbn-' + i).value = saved;
   }
@@ -1705,7 +1767,7 @@ function loadStoryNotes() {
 loadStoryNotes();
 
 // Day-of checklist
-const dayIds = ['nb1','nb2','nb3','nb4','nb5','d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11'];
+const dayIds = ['nb1','nb2','nb3','nb4','nb5','d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12','d13'];
 function saveChecks() {
   const s = {};
   dayIds.forEach(id => { s[id] = document.getElementById(id).checked; });
