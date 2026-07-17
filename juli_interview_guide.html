@@ -185,8 +185,14 @@
     color: #9B8E8A; transition: all 0.15s; margin: 0.75rem 0 0.25rem;
   }
   .sb-answer-toggle:hover, .sb-answer-toggle.open { background: #FFF8F6; color: #C4746E; border-color: #C4746E; }
-  .sb-answer-wrap { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .sb-answer-wrap { max-height: 0; overflow: hidden; transition: max-height 0.22s ease; }
   .sb-answer-wrap.open { max-height: 1600px; }
+  @keyframes sbSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .sb-answer-wrap.open .sb-answer-toolbar { animation: sbSlideIn 0.32s ease 0.06s both; }
+  .sb-answer-wrap.open .sb-answer         { animation: sbSlideIn 0.44s ease 0.14s both; }
   .sb-answer-toolbar { display: flex; align-items: center; justify-content: space-between; margin: 0.5rem 0 0.3rem; }
   .sb-answer-hint { font-size: 0.72rem; color: #B0A8A4; font-family: 'Inter', system-ui, sans-serif; }
   .sb-edit-btn {
