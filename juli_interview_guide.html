@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   body { font-family: 'Inter', system-ui, sans-serif; background: #FAF7F2; color: #3A3330; margin: 0; padding: 0; font-size: 1rem; }
@@ -1376,6 +1378,36 @@
 </div><!-- end .page -->
 
 <script>
+// ── Firebase sync ─────────────────────────────────────────────
+const FB_CONFIG = {
+  apiKey: "AIzaSyAb00kAATM5j2oIwppdmzKaQENaZ0fSL0s",
+  authDomain: "juli-guide-f939c.firebaseapp.com",
+  databaseURL: "https://juli-guide-f939c-default-rtdb.firebaseio.com",
+  projectId: "juli-guide-f939c",
+  storageBucket: "juli-guide-f939c.firebasestorage.app",
+  messagingSenderId: "529910762396",
+  appId: "1:529910762396:web:be771ee81eed55d1a0d659"
+};
+let db = null;
+try { firebase.initializeApp(FB_CONFIG); db = firebase.database(); } catch(e) {}
+
+const _lsSet = localStorage.setItem.bind(localStorage);
+localStorage.setItem = function(key, value) {
+  _lsSet(key, value);
+  if (db && key.startsWith('juli_')) db.ref('g/' + key).set(String(value)).catch(() => {});
+};
+
+function syncFromFirebase() {
+  if (!db) return;
+  db.ref('g/').once('value').then(snap => {
+    const data = snap.val();
+    if (!data) return;
+    Object.entries(data).forEach(([k, v]) => _lsSet(k, v));
+    rehydrateAll();
+  }).catch(() => {});
+}
+// ─────────────────────────────────────────────────────────────
+
 // Tab switching
 function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -1640,7 +1672,7 @@ function toggleAnswerEdit(i) {
 function saveAnswer(i) {
   localStorage.setItem('juli_sa_' + i, document.getElementById('sa-ta-' + i).value);
 }
-(function restoreAnswerEdits() {
+function restoreAnswerEdits() {
   for (let i = 0; i <= 9; i++) {
     const saved = localStorage.getItem('juli_sa_' + i);
     if (!saved) continue;
@@ -1649,7 +1681,8 @@ function saveAnswer(i) {
     if (div) div.innerHTML = saved.split(/\n\n+/).map(t => '<p>' + t.trim() + '</p>').join('');
     if (ta) ta.value = saved;
   }
-})();
+}
+restoreAnswerEdits();
 function saveStoryNote(i) {
   const val = document.getElementById('sbn-' + i).value;
   localStorage.setItem('juli_sbn_' + i, val);
@@ -1680,6 +1713,23 @@ function loadChecks() {
 }
 dayIds.forEach(id => document.getElementById(id).addEventListener('change', saveChecks));
 loadChecks();
+
+function rehydrateAll() {
+  const introEl = document.getElementById('intro-text');
+  if (introEl) introEl.value = localStorage.getItem('juli_intro') || defaultIntro;
+  ['ab-top','ab-ice','ab-bot'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = localStorage.getItem('juli_' + id) || '';
+  });
+  loadFlashcards(); renderQuestionBank();
+  const notesEl = document.getElementById('notes-text');
+  if (notesEl) notesEl.value = localStorage.getItem('juli_notes') || '';
+  restoreAnswerEdits();
+  loadStoryNotes();
+  loadChecks();
+}
+
+syncFromFirebase();
 </script>
 </body>
 </html>
